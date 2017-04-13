@@ -11,7 +11,7 @@
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-	<script type="text/javascript" src = "js/ajax.js" ></script>
+	<script type="text/javascript" src = "js/index_ajx.js" ></script>
 
 
 <script type="text/javascript">
@@ -56,8 +56,8 @@
 								</ul></div></p>
 						  </div>
 							  <div class="search_box">
-					     		<form>
-					     			<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
+					     		<form onsubmit="search(); return false;">
+									<input id="search1" type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="" >
 					     		</form>
 					     	</div>
 						 <div class="clear"></div>

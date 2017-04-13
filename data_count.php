@@ -1,9 +1,11 @@
 <?php
 
+$movie_category= $_POST['movie_category'];
+
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
 
-$query = "SELECT count(*) FROM movies" ;
+$query = "SELECT count(*) FROM movies where Category ='".$movie_category."'";
 $result=mysqli_query($sql_connect,$query);
 
 $row=$result->fetch_assoc();

@@ -10,17 +10,28 @@ $limit = $_POST['limit'];
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
 
-$query = "SELECT * FROM movies where id >=".$limit ;
+if ($movie_category == 'All')
+{
+    $query = "SELECT * FROM movies id >=".$limit  ;
+}
+else{
+    $query = "SELECT * FROM movies where Category ='".$movie_category."' and id >=".$limit  ;
+}
+$query = "SELECT * FROM movies where Category ='".$movie_category."' and id >=".$limit  ;
 $result=mysqli_query($sql_connect,$query);
 
-while($row=$result->fetch_assoc())
+$num_rows = mysqli_num_rows($result);
 
-{
-    $table_data[]= array("id"=>$row['Id'],"category" =>$row['Category'],"name"=>$row['Name'],"year"=>$row['Year'],"img"=>$row['Img_url'],"cost"=>$row['Cost']);
+if ($num_rows>0) {
+
+    while ($row = $result->fetch_assoc()) {
+        $table_data[] = array("id" => $row['Id'], "category" => $row['Category'], "name" => $row['Name'], "year" => $row['Year'], "img" => $row['Img_url'], "cost" => $row['Cost']);
+    }
+
+    echo json_encode($table_data);
+
 }
-
-echo json_encode($table_data);
-
-
+else
+{echo 0;}
 ?>
 
