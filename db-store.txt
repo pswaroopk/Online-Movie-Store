@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 11, 2017 at 02:06 AM
+-- Generation Time: Apr 19, 2017 at 08:14 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.15
 
@@ -25,18 +25,6 @@ CREATE TABLE `cart` (
   `Moviename` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`Username`, `Moviename`) VALUES
-('akshay', 'Avatar'),
-('akshay', 'Avatar'),
-('akshay', 'Black Swan'),
-('akshay', 'Black Swan'),
-('akshay', 'Coraline'),
-('akshay', 'Avatar');
-
 -- --------------------------------------------------------
 
 --
@@ -49,58 +37,80 @@ CREATE TABLE `movies` (
   `Category` varchar(15) NOT NULL,
   `Img_url` varchar(50) NOT NULL,
   `Year` varchar(4) NOT NULL,
-  `Cost` int(10) NOT NULL DEFAULT '0'
+  `Cost` int(10) NOT NULL DEFAULT '0',
+  `Description` varchar(2000) NOT NULL DEFAULT 'movie_desc'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `movies`
 --
 
-INSERT INTO `movies` (`Id`, `Name`, `Category`, `Img_url`, `Year`, `Cost`) VALUES
-(1, 'Avatar', 'english', 'avatar.jpg', '2015', 100),
-(2, 'Black Swan', 'english', 'black-swan.jpg', '2015', 312),
-(3, 'Coraline', 'english', 'Coraline.jpg', '2015', 200),
-(4, 'Eclipse', 'english', 'Eclipse.jpg', '2018', 100),
-(5, 'New Moon', 'english', 'New-Moon.jpg', '2015', 213),
-(6, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(7, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(8, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(9, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(10, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(11, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(12, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(13, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(14, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(15, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(16, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(17, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(18, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(19, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(20, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(21, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(22, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(23, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(24, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(25, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(26, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(27, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(28, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(29, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(30, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(31, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(32, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(33, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(34, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(35, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(36, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(37, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(38, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(39, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(40, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(41, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(42, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(43, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300),
-(44, 'Avatar', 'english', 'avatar.jpg', '2015', 100);
+INSERT INTO `movies` (`Id`, `Name`, `Category`, `Img_url`, `Year`, `Cost`, `Description`) VALUES
+(1, 'Avatar', 'english', 'avatar_movie.jpg', '2015', 100, 'movie_desc'),
+(2, 'Black Swan', 'english', 'black-swan.jpg', '2015', 312, 'movie_desc'),
+(3, 'Coraline', 'english', 'Coraline.jpg', '2015', 200, 'movie_desc'),
+(4, 'Eclipse', 'english', 'Eclipse.jpg', '2018', 100, 'movie_desc'),
+(5, 'New Moon', 'english', 'New-Moon.jpg', '2015', 213, 'movie_desc'),
+(6, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(7, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(8, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(9, 'Black Swan', 'telugu', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(10, 'Black Swan', 'hindi', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(11, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(12, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(13, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(14, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(15, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(16, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(17, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(18, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(19, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(20, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(21, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(22, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(23, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(24, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(25, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(26, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(27, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(28, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(29, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(30, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(31, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(32, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(33, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(34, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(35, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(36, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(37, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(38, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(39, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(40, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(41, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(42, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
+(43, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `Name` varchar(10) NOT NULL,
+  `Username` varchar(20) NOT NULL,
+  `Password` varchar(300) NOT NULL,
+  `Email` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`Name`, `Username`, `Password`, `Email`) VALUES
+('', 'akshay', '3517525329b170f7ce87e0e16b6d0778', 'aksh@gmail.com'),
+('', 'akshay1', '3517525329b170f7ce87e0e16b6d0778', 'asd@gmail.com'),
+('', 'awdsdd', '39826cc6ee17ad9fa8566084a400871e', 'awda@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -113,6 +123,12 @@ ALTER TABLE `movies`
   ADD PRIMARY KEY (`Id`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`Username`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -120,4 +136,4 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `Id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `Id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
