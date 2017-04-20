@@ -38,9 +38,7 @@ function loadData(movie) {
     ajax_call1(1);  // fethcing data from db
 }
 
-function pagination(count2)
-{
-
+function pagination(count2){
     var count1 = count2/10;
 
     var pag = $('<div class="center">').append($('<div class="pagination" id="pa1">').append(
@@ -59,8 +57,7 @@ function pagination(count2)
 
 }
 
-function ajax_call()
-{
+function ajax_call(){
     $.ajax({
         async: false,
         url: 'http://localhost/php/data_count.php',
@@ -73,9 +70,7 @@ function ajax_call()
     })
 }
 
-
-function ajax_call1(limit)
-{
+function ajax_call1(limit){
 
     $.ajax({
         async: false,
@@ -93,9 +88,7 @@ function ajax_call1(limit)
     parsing_data();
 }
 
-
-function parsing_data()
-{
+function parsing_data(){
     var d2;
     $("#movie-page").empty();
     $(function () {
@@ -129,11 +122,9 @@ function parsing_data()
                     ));
 
                 if (i % 5 == 0) {
-
                     d2 = $('<div class="section group">');
                     $("#movie-page ").append(d2);
                 }
-
                 d2.append(d3);
             }
         })
@@ -176,7 +167,6 @@ function ajax_fetchUser(){
 
 function movie_preview(name1){
     window.location.replace('http://localhost/php/movie_preview.php?name=' + name1);
-
 }
 
 function search(){

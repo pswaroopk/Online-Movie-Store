@@ -1,0 +1,224 @@
+<?php
+$user_name = $_GET['name'];
+$user_name = 'swaroop';
+
+$sql_connect=mysqli_connect('localhost','root','root','movie_store');
+
+//SELECT * FROM cart INNER JOIN movies WHERE cart.Username='swaroop' and movies.Name=cart.Name
+$query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name'";
+$result=mysqli_query($sql_connect,$query);
+
+while($row=$result->fetch_assoc()){
+  // $table_data[]= array("id"=>$row['Id'],"category" =>$row['Category'],"name"=>$row['Name'],"year"=>$row['Year'],"img"=>$row['Img_url'],"cost"=>$row['Cost'],"desc"=>$row['Description']);
+    $table_data[]= $row;
+ }
+$jdata = json_encode($table_data);
+error_log(print_r('', TRUE));
+?>
+
+<!DOCTYPE HTML>
+<head>
+    <title>Free Movies Store Website Template | Preview :: w3layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src = "../js/index.js" ></script
+    <script type="text/javascript" src="../js/move-top.js"></script>
+    <script type="text/javascript">
+
+      var data = '<?php echo $jdata ?>';
+      var jdata=$.parseJSON(data);
+      var d2 = $('<div class="section group">');
+      $("#movie-page-cart").empty();
+      $(function () {
+          var d1 = $('<div class="content_top">').append(
+              $('<div class="heading">').append(
+                  $('<h3>').text('Your Movies')
+              ));
+          $("#movie-page-cart").append(d1);
+          $("#movie-page-cart").append(d2);
+      });
+
+      if(jdata != 0) {
+          $.each(jdata, function (i, item) {
+              //var movie_cart = "preview.html";
+              var movie_cost = item.Cost;
+              var movie_name = item.Name;
+              var movie_image = "../images/" + item.Img_url;
+              var mov_name = '\'' + movie_name + '\'';
+              //alert(mov_name);
+              var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+                  $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
+                  $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
+                  $('<div class="price-details">').append(
+                      $('<div class="price-number">').append(
+                          $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
+                      $('<div class="add-cart">').append(
+                          $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
+                      $('<div class="clear">')
+                  ));
+              d2.append(d3);
+
+          })
+      }
+      else{
+          $("#movie-page-cart").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
+      }
+
+      function removeFromCart(name){
+        var username = '<?php echo $user_name ?>';
+        $.ajax({
+            async: false,
+            url: 'http://localhost/php/delete_cart.php',
+            type: 'post',
+            data: {user_name : username, movie_name : name },
+            success:function(data){
+              window.location.href = 'show_cart.php';
+            },
+            error: function() { alert("error loading file");  }
+        });
+      }
+
+
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="headertop_desc">
+        <div class="wrap">
+            <div class="nav_list">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../contact.html">Sitemap</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="account_desc">
+                <ul>
+                    <li><a href="../contact.html">Register</a></li>
+                    <li><a href="../contact.html">Login</a></li>
+                    <li><a href="../preview.html">Delivery</a></li>
+                    <li><a href="#">Checkout</a></li>
+                    <li><a href="#">My Account</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="header_top">
+            <div class="logo">
+                <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
+            </div>
+            <div class="header_top_right">
+                <div class="cart">
+                    <p><span>View Cart</span>
+                    </p>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <script type="text/javascript">
+                function DropDown(el) {
+                    this.dd = el;
+                    this.initEvents();
+                }
+                DropDown.prototype = {
+                    initEvents : function() {
+                        var obj = this;
+
+                        obj.dd.on('click', function(event){
+                            $(this).toggleClass('active');
+                            event.stopPropagation();
+                        });
+                    }
+                }
+
+                $(function() {
+
+                    var dd = new DropDown( $('#dd') );
+
+                    $(document).click(function() {
+                        // all dropdowns
+                        $('.wrapper-dropdown-2').removeClass('active');
+                    });
+
+                });
+            </script>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="wrap">
+      <div class="content" id="cont1">
+        <div class="content" id="movie-page-cart">
+        </div>
+      </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="wrap">
+        <div class="section group">
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">Advanced Search</a></li>
+                    <li><a href="#">Orders and Returns</a></li>
+                    <li><a href="../contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>Why buy from us</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="../contact.html">Site Map</a></li>
+                    <li><a href="#">Search Terms</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>My account</h4>
+                <ul>
+                    <li><a href="../contact.html">Sign In</a></li>
+                    <li><a href="../index.html">View Cart</a></li>
+                    <li><a href="#">My Wishlist</a></li>
+                    <li><a href="#">Track My Order</a></li>
+                    <li><a href="../contact.html">Help</a></li>
+                </ul>
+            </div>
+            <div class="col_1_of_4 span_1_of_4">
+                <h4>Contact</h4>
+                <ul>
+                    <li><span>+91-123-456789</span></li>
+                    <li><span>+00-123-000000</span></li>
+                </ul>
+                <div class="social-icons">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#" target="_blank"><img src="../images/facebook.png" alt="" /></a></li>
+                        <li><a href="#" target="_blank"><img src="../images/twitter.png" alt="" /></a></li>
+                        <li><a href="#" target="_blank"><img src="../images/skype.png" alt="" /> </a></li>
+                        <li><a href="#" target="_blank"> <img src="../images/linkedin.png" alt="" /></a></li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy_right">
+            <p>Company Name © All rights Reseverd | Design by  <a href="">Akshay</a> </p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<a href="#" id="toTop"><span id="toTopHover"> </span></a>
+</body>
+</html>

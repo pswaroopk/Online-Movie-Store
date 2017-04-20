@@ -84,10 +84,14 @@ while($row=$result1->fetch_assoc())
             </div>
             <div class="header_top_right">
                 <div class="cart">
-                    <p><span>Cart</span><div id="dd" class="wrapper-dropdown-2"> (empty)
+                    <p><span>View Cart</span>
+                      <input type="button" onClick="document.location.href='show_cart.php'" />
+                      <!-- <div id="dd" class="wrapper-dropdown-2"> (empty)
                         <ul class="dropdown">
                             <li>you have no items in your Shopping cart</li>
-                        </ul></div></p>
+                        </ul>
+                      </div> -->
+                    </p>
                 </div>
 <!--                <div class="search_box">-->
 <!--                    <form>-->
@@ -316,6 +320,3 @@ while($row=$result1->fetch_assoc())
 <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>
-
-
-
