@@ -142,7 +142,7 @@ body {
 .cart{
 	 float:right;
 	 position: relative;
-	 padding:6px 150px  6px 15px;
+	 padding: 6px 70px  6px 15px;
 	 background: url(../images/strip-bg.gif) repeat-x #F6F6F6;
 	 border: 1px solid #D2D2D2;
 	 font-family: 'ambleregular';
@@ -237,7 +237,7 @@ body {
 	padding:10px;
 	background:#FC7D01;
 	text-transform:uppercase;
-	font-family: 'ambleregular';	
+	font-family: 'ambleregular';
 }
 .categories li{
 	background: url(../images/strip-bg.gif) repeat-x #F6F6F6;
@@ -251,7 +251,7 @@ body {
     margin:0 20px;
     background:url(../images/drop_arrow.png) no-repeat 0;
     border-bottom: 1px solid #F1F1F1;
-    text-transform:uppercase;	
+    text-transform:uppercase;
 }
 .categories li:last-child a{
 	border:none;
@@ -301,7 +301,7 @@ body {
 }
 .images_1_of_5 {
 	width: 15.72%;
-	padding:1.5%; 
+	padding:1.5%;
 	text-align: center;
 	position: relative;
 }
@@ -703,7 +703,7 @@ body {
 }
 .special_movies{
 	border: 1px solid #ECE9E9;
-	margin-top:20px;	
+	margin-top:20px;
 }
 .movie_poster{
 	float:left;
@@ -997,7 +997,7 @@ body {
 		text-align:center;
 	}
 	.account_desc{
-	   margin-top:5px;	
+	   margin-top:5px;
 	}
 	.cart{
 		float:none;

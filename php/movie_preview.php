@@ -83,17 +83,11 @@ while($row=$result1->fetch_assoc())
                 <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
             </div>
             <div class="header_top_right">
-                <div class="cart">
-                    <p><span>Cart</span><div id="dd" class="wrapper-dropdown-2"> (empty)
-                        <ul class="dropdown">
-                            <li>you have no items in your Shopping cart</li>
-                        </ul></div></p>
-                </div>
-<!--                <div class="search_box">-->
-<!--                    <form>-->
-<!--                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">-->
-<!--                    </form>-->
-<!--                </div>-->
+              <div class="cart">
+                <a href="show_cart.php">
+                  <p><span>View Cart</span></p>
+                </a>
+              </div>
                 <div class="clear"></div>
             </div>
             <script type="text/javascript">
@@ -278,7 +272,7 @@ while($row=$result1->fetch_assoc())
                 <h4>My account</h4>
                 <ul>
                     <li><a href="../contact.html">Sign In</a></li>
-                    <li><a href="../index.html">View Cart</a></li>
+                    <li><a href="show_cart.php">View Cart</a></li>
                     <li><a href="#">My Wishlist</a></li>
                     <li><a href="#">Track My Order</a></li>
                     <li><a href="../contact.html">Help</a></li>
@@ -316,6 +310,3 @@ while($row=$result1->fetch_assoc())
 <a href="#" id="toTop"><span id="toTopHover"> </span></a>
 </body>
 </html>
-
-
-

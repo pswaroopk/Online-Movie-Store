@@ -4,8 +4,6 @@ $movie_category = $_POST['movie_category'];
 $limit = $_POST['limit'];
 
 //error_log(print_r($movie_category, TRUE));
-
-
 //include("init.php");
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
@@ -34,4 +32,3 @@ if ($num_rows>0) {
 else
 {echo 0;}
 ?>
-

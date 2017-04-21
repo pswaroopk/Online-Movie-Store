@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.4.15.5
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Apr 19, 2017 at 08:14 AM
--- Server version: 5.6.35
--- PHP Version: 7.0.15
+-- Generation Time: Apr 21, 2017 at 02:54 AM
+-- Server version: 5.5.49-log
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `movie_store`
@@ -20,10 +26,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `cart`
 --
 
-CREATE TABLE `cart` (
+CREATE TABLE IF NOT EXISTS `cart` (
   `Username` varchar(20) NOT NULL,
-  `Moviename` varchar(20) NOT NULL
+  `Name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`Username`, `Name`) VALUES
+('akshay', 'Avatar'),
+('swaroop', 'Avatar'),
+('swaroop', 'Black Swan'),
+('swaroop', 'Coraline'),
+('swaroop', 'Eclipse');
 
 -- --------------------------------------------------------
 
@@ -31,7 +48,7 @@ CREATE TABLE `cart` (
 -- Table structure for table `movies`
 --
 
-CREATE TABLE `movies` (
+CREATE TABLE IF NOT EXISTS `movies` (
   `Id` int(2) NOT NULL,
   `Name` varchar(40) NOT NULL,
   `Category` varchar(15) NOT NULL,
@@ -39,7 +56,7 @@ CREATE TABLE `movies` (
   `Year` varchar(4) NOT NULL,
   `Cost` int(10) NOT NULL DEFAULT '0',
   `Description` varchar(2000) NOT NULL DEFAULT 'movie_desc'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `movies`
@@ -50,45 +67,7 @@ INSERT INTO `movies` (`Id`, `Name`, `Category`, `Img_url`, `Year`, `Cost`, `Desc
 (2, 'Black Swan', 'english', 'black-swan.jpg', '2015', 312, 'movie_desc'),
 (3, 'Coraline', 'english', 'Coraline.jpg', '2015', 200, 'movie_desc'),
 (4, 'Eclipse', 'english', 'Eclipse.jpg', '2018', 100, 'movie_desc'),
-(5, 'New Moon', 'english', 'New-Moon.jpg', '2015', 213, 'movie_desc'),
-(6, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(7, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(8, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(9, 'Black Swan', 'telugu', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(10, 'Black Swan', 'hindi', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(11, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(12, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(13, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(14, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(15, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(16, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(17, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(18, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(19, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(20, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(21, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(22, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(23, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(24, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(25, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(26, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(27, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(28, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(29, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(30, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(31, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(32, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(33, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(34, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(35, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(36, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(37, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(38, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(39, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(40, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(41, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(42, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc'),
-(43, 'Black Swan', 'english', 'black-swan.jpg', '2005', 300, 'movie_desc');
+(5, 'New Moon', 'english', 'New-Moon.jpg', '2015', 213, 'movie_desc');
 
 -- --------------------------------------------------------
 
@@ -96,11 +75,11 @@ INSERT INTO `movies` (`Id`, `Name`, `Category`, `Img_url`, `Year`, `Cost`, `Desc
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `Name` varchar(10) NOT NULL,
   `Username` varchar(20) NOT NULL,
   `Password` varchar(300) NOT NULL,
-  `Email` varchar(20) NOT NULL
+  `Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -110,23 +89,33 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`Name`, `Username`, `Password`, `Email`) VALUES
 ('', 'akshay', '3517525329b170f7ce87e0e16b6d0778', 'aksh@gmail.com'),
 ('', 'akshay1', '3517525329b170f7ce87e0e16b6d0778', 'asd@gmail.com'),
-('', 'awdsdd', '39826cc6ee17ad9fa8566084a400871e', 'awda@gmail.com');
+('', 'awdsdd', '39826cc6ee17ad9fa8566084a400871e', 'awda@gmail.com'),
+('swaroop k', 'swaroop', 'password', 'getswaroopnow@gmail.com');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`Username`,`Name`),
+  ADD KEY `fk_movie` (`Name`);
+
+--
 -- Indexes for table `movies`
 --
 ALTER TABLE `movies`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Name`),
+  ADD UNIQUE KEY `Id` (`Id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`Username`);
+  ADD PRIMARY KEY (`Username`),
+  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -136,4 +125,18 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `Id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `Id` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `fk_movie` FOREIGN KEY (`Name`) REFERENCES `movies` (`Name`),
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`Username`) REFERENCES `user` (`Username`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
