@@ -22,5 +22,6 @@ if (isset($_POST['user_name']))
 	}
 	exit();
 }
+
 mysqli_close($conn);
 ?>
