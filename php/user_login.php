@@ -10,45 +10,41 @@ if (!conn)
 $username = $_POST['loginusername'];
 $password = md5($_POST['loginpassword']);
 
-if (!empty($username) && !empty($password))
+if (!empty($_POST['loginusername']) && !empty($_POST['loginpassword']))
 {
 	$sql = "SELECT * FROM user WHERE Username = '$username'";
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_assoc($result);
-	$dbpassword = $row['password'];
+	$dbpassword = $row['Password'];
 	$dbusername = $row['Username'];
 	if (($password == $dbpassword) && ($username == $dbusername))
 	{
 		$_SESSION['user'] = $dbusername;
-		header('Location: http://localhost/index.html');
+		header('Location: ../index.html');
 	}
 	else
 	{
-		if ($username != $dbusername)
+		if ($username != $dbusername && $password != $dbpassword)
 		{
-			$message = "Username did not Match";
-			echo "<script type='text/javascript'>
-					alert('$message');
-					window.location.href = '../user_login.html';
-				</script>";
+			$_SESSION['message'] = "Both the fields are incorrect.";
+			header ('Location: ../login_page.php');
 		}
 		else if ($password != $dbpassword)
 		{
-			$message = "Password is incorrect";
-			echo "<script type='text/javascript'>
-					alert('$message');
-					window.location.href = '../user_login.html';
-				</script>";
+			$_SESSION['message'] = "Password is incorrect";
+			header ('Location: ../login_page.php');
+		}
+		else
+		{
+			$_SESSION['message'] = "Username is incorrect";
+			header ('Location: ../login_page.php');
 		}
 	}
 }
 else
 {
-	$message = "Enter both Fields to Login.";
-	echo "<script type='text/javascript'>
-			alert('$message');
-			window.location.href = '../user_login.html';
-		</script>";
+	$_SESSION['message'] = "Enter both Fields to Login.";
+	header ('Location: ../login_page.php');
 }
 
 mysqli_close($conn);
