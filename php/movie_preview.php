@@ -27,7 +27,7 @@ $movie_desc = $table_data[0]['desc'];
 $movie_img = $table_data[0]['img'];
 //echo $movie_category;
 
-error_log(print_r($movie_desc, TRUE));
+//error_log(print_r($movie_desc, TRUE));
 
 
 $query1 = "SELECT * FROM movies where Category ='".$movie_category."' and Name != '".$movie_name."'" ;
@@ -60,18 +60,18 @@ while($row=$result1->fetch_assoc())
         <div class="wrap">
             <div class="nav_list">
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.php">Home</a></li>
 <!--                    <li><a href="../contact.html">Sitemap</a></li>-->
                     <li><a href="../contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="account_desc">
                 <ul>
-                    <li><a href="signup_page.php">Register</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li id="register1"><a href="signup_page.php">Register</a></li>
+                    <li id="login1"><a href="login.php">Login</a></li>
 <!--                    <li><a href="../preview.html">Delivery</a></li>-->
-                    <li><a href="show_cart.php">Checkout</a></li>
-                    <li><a href="show_cart.php">My Account</a></li>
+                    <li id="checkout"><a href="show_cart.php">Checkout</a></li>
+                    <li id="logout"><a href="show_cart.php">Logout</a></li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -80,10 +80,10 @@ while($row=$result1->fetch_assoc())
     <div class="wrap">
         <div class="header_top">
             <div class="logo">
-                <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
+                <a href="../index.php"><img src="../images/logo.png" alt="" /></a>
             </div>
             <div class="header_top_right">
-              <div class="cart">
+              <div class="cart" id="cart12">
                 <a href="show_cart.php">
                   <p><span>View Cart</span></p>
                 </a>

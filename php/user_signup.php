@@ -2,7 +2,7 @@
 session_start();
 
 $conn = mysqli_connect("localhost", "root", "root", "movie_store");
-if (!conn)
+if (!$conn)
 {
 	die("Connection Failed: " . mysqli_connect_error());
 }

@@ -9,6 +9,7 @@
 		<link href="../css/slider.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="../css/front.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src = "../js/login.js" ></script>
 		<script src="../assets/jquery-1.11.2.min.js"></script>
 		<script src="../assets/jquery.validate.min.js"></script>
 		<script src="../assets/register.js"></script>
@@ -62,8 +63,8 @@
 						<li><a href="#">Register</a></li>
 						<li><a href="login.php">Login</a></li>
 <!--						<li><a href="../preview.html">Delivery</a></li>-->
-						<li><a href="login.php">Checkout</a></li>
-						<li><a href="login.php">My Account</a></li>
+						<li id="checkout"><a href="login.php">Checkout</a></li>
+						<li id="logout"><a href="login.php">Logout</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -73,7 +74,7 @@
 	<br/><br/>
 		<div class="container">
 		<div class="logo">
-			<a href="../index.html"><img src="../logo.png" alt="" /></a>
+			<a href="../index.php"><img src="../logo.png" alt="" /></a>
 		</div>
 			<div class="signup-form-container">
 				<form method="post" role="form" id="register-form" autocomplete="off" action="user_signup.php">

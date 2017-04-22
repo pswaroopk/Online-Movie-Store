@@ -17,6 +17,7 @@ $message = $_SESSION['message'];
 		<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<script src="../assets/jquery-1.11.2.min.js"></script>
 		<script src="../assets/jquery.validate.min.js"></script>
+        <script type="text/javascript" src = "../js/login.js" ></script>
 	</head>
 	<body>
 		<div class="header">
@@ -31,11 +32,11 @@ $message = $_SESSION['message'];
 					</div>
 					<div class="account_desc">
 						<ul >
-							<li><a href="signup_page.php">Register</a></li>
-							<li><a href="#">Login</a></li>
+							<li id="register1"><a href="signup_page.php">Register</a></li>
+							<li id="login1"><a href="#">Login</a></li>
 <!--							<li><a href="../preview.html">Delivery</a></li>-->
-							<li><a href="login.php">Checkout</a></li>
-							<li><a href="login.php">My Account</a></li>
+							<li id="checkout"> <a href="login.php">Checkout</a></li>
+							<li id="logout"><a href="login.php">My Account</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -45,7 +46,7 @@ $message = $_SESSION['message'];
 		<br/><br/>
 		<div class="container">
 		<div class="logo">
-			<a href="../index.html"><img src="../logo.png" alt="" /></a>
+			<a href="../index.php"><img src="../logo.png" alt="" /></a>
 		</div>
 			<div class="signup-form-container">
 				<form method="post" role="form" id="register-form" autocomplete="off" action="user_login.php">

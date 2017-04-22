@@ -2,7 +2,7 @@
 session_start();
 
 $conn = mysqli_connect("localhost", "root", "root", "movie_store");
-if (!conn)
+if (!$conn)
 {
     die("Connection Failed: " . mysqli_connect_error());
 }
@@ -32,10 +32,13 @@ else
     $row = mysqli_fetch_assoc($result);
     $dbpassword = $row['Password'];
     $dbusername = $row['Username'];
+    $dbfullname = $row['Name'];
     if (($password == $dbpassword) && ($username == $dbusername))
     {
-        $_SESSION['user'] = $dbusername;
-        header('Location: ../index.html');
+        $_SESSION['username'] = $dbusername;
+        $_SESSION['fullname'] = $dbfullname;
+
+        header('Location: ../index.php');
     }
     else
     {
