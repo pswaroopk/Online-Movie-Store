@@ -3,8 +3,8 @@
 $movie_category = $_POST['movie_category'];
 $limit = $_POST['limit'];
 
-error_log(print_r($movie_category, TRUE));
-error_log(print_r($limit, TRUE));
+//error_log(print_r($movie_category, TRUE));
+//error_log(print_r($limit, TRUE));
 //include("init.php");
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
