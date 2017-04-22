@@ -21,7 +21,25 @@ var curr_user;
 
 $(document).ready(function (){
     ajax_fetchUser();
-})
+
+    if(curr_user==''){
+        $("#checkout").hide();
+        $("#logout").hide();
+        $("#register1").show();
+        $("#login1").show();
+        $("#cart12").hide();
+
+
+    }
+    else
+    {
+        $("#checkout").show();
+        $("#logout").show();
+        $("#register1").hide();
+        $("#login1").hide();
+        $("#cart12").show();
+    }
+});
 
 function loadData(movie) {
 
@@ -38,13 +56,11 @@ function loadData(movie) {
     ajax_call1(1);  // fethcing data from db
 }
 
-function pagination(count2)
-{
-
+function pagination(count2){
     var count1 = count2/10;
 
     var pag = $('<div class="center">').append($('<div class="pagination" id="pa1">').append(
-        $('<a href="">&laquo;</a>'),
+        $('<a href="#">&laquo;</a>'),
         $('<a onclick="ajax_call1(1)">1</a>')
     ));
 
@@ -55,12 +71,11 @@ function pagination(count2)
         $("#pa1").append($('<a onclick="ajax_call1('+k+')">'+(i+1)+'</a>'));
     }
 
-    $("#pa1").append($('<a href="">&raquo;</a>'));
+    $("#pa1").append($('<a href="#">&raquo;</a>'));
 
 }
 
-function ajax_call()
-{
+function ajax_call(){
     $.ajax({
         async: false,
         url: 'http://localhost/php/data_count.php',
@@ -73,9 +88,7 @@ function ajax_call()
     })
 }
 
-
-function ajax_call1(limit)
-{
+function ajax_call1(limit){
 
     $.ajax({
         async: false,
@@ -93,9 +106,7 @@ function ajax_call1(limit)
     parsing_data();
 }
 
-
-function parsing_data()
-{
+function parsing_data(){
     var d2;
     $("#movie-page").empty();
     $(function () {
@@ -129,11 +140,9 @@ function parsing_data()
                     ));
 
                 if (i % 5 == 0) {
-
                     d2 = $('<div class="section group">');
                     $("#movie-page ").append(d2);
                 }
-
                 d2.append(d3);
             }
         })
@@ -146,19 +155,25 @@ function parsing_data()
 
 function addToCart(name){
     //alert(name);
-    $.ajax({
-        async: false,
-        url: 'http://localhost/php/cart_add.php',
-        type: 'post',
-        //dataType : "json",
-        data: {user_name : curr_user, movie_name : name },
-        success:function(data)
-        {
-            alert("Added to Cart Sucessfully!!")
-        },
-        error: function() { alert("error loading file");  }
-    });
-
+    if(curr_user == '')
+    {
+        alert("Login to enable Cart");
+    }
+    else {
+        $.ajax({
+            async: false,
+            url: 'http://localhost/php/cart_add.php',
+            type: 'post',
+            //dataType : "json",
+            data: {user_name: curr_user, movie_name: name},
+            success: function (data) {
+                alert("Added to Cart Sucessfully!!")
+            },
+            error: function () {
+                alert("error loading file");
+            }
+        });
+    }
 }
 
 function ajax_fetchUser(){
@@ -176,7 +191,6 @@ function ajax_fetchUser(){
 
 function movie_preview(name1){
     window.location.replace('http://localhost/php/movie_preview.php?name=' + name1);
-
 }
 
 function search(){
@@ -196,13 +210,17 @@ function search(){
         data: {movie_name : p.value },
         success:function(data)
         {
+
             jdata = $.parseJSON(data);
+
+
 
         },
         error: function() { alert("error loading file");  }
     });
-
-    parsing_data();
+    // movie_category = 'All';
+    // pagination(43);
+     parsing_data();
     return false;
 
 
