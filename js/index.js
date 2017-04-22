@@ -21,7 +21,7 @@ var curr_user;
 
 $(document).ready(function (){
     ajax_fetchUser();
-})
+});
 
 function loadData(movie) {
 
@@ -42,7 +42,7 @@ function pagination(count2){
     var count1 = count2/10;
 
     var pag = $('<div class="center">').append($('<div class="pagination" id="pa1">').append(
-        $('<a href="">&laquo;</a>'),
+        $('<a href="#">&laquo;</a>'),
         $('<a onclick="ajax_call1(1)">1</a>')
     ));
 
@@ -53,7 +53,7 @@ function pagination(count2){
         $("#pa1").append($('<a onclick="ajax_call1('+k+')">'+(i+1)+'</a>'));
     }
 
-    $("#pa1").append($('<a href="">&raquo;</a>'));
+    $("#pa1").append($('<a href="#">&raquo;</a>'));
 
 }
 
@@ -186,13 +186,17 @@ function search(){
         data: {movie_name : p.value },
         success:function(data)
         {
+
             jdata = $.parseJSON(data);
+
+
 
         },
         error: function() { alert("error loading file");  }
     });
-
-    parsing_data();
+    // movie_category = 'All';
+    // pagination(43);
+     parsing_data();
     return false;
 
 
