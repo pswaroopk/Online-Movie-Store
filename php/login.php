@@ -17,7 +17,7 @@ $message = $_SESSION['message'];
 		<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<script src="../assets/jquery-1.11.2.min.js"></script>
 		<script src="../assets/jquery.validate.min.js"></script>
-        <script type="text/javascript" src = "../js/login.js" ></script>
+    <script type="text/javascript" src = "../js/login.js" ></script>
 	</head>
 	<body>
 		<div class="header">
@@ -51,12 +51,12 @@ $message = $_SESSION['message'];
 			<div class="signup-form-container">
 				<form method="post" role="form" id="register-form" autocomplete="off" action="user_login.php">
 					<div class="form-header">
-						<h3 class="form-title"><i class="fa fa-user"></i>Login</h3> 
+						<h3 class="form-title"><i class="fa fa-user"></i>Login</h3>
 						<div class="pull-right">
 							<h3 class="form-title"><span class="glyphicon glyphicon-pencil"></span></h3>
-						</div>  
-					</div>	  
-					<div class="form-body">			  
+						</div>
+					</div>
+					<div class="form-body">
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
@@ -68,19 +68,19 @@ $message = $_SESSION['message'];
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
 								<input name="loginpassword" id="password" type="password" class="form-control" placeholder="Password">
-							</div>  
-							<span class="help-block" id="error"></span>                     
+							</div>
+							<span class="help-block" id="error"></span>
 						</div>
 						<?php
 						echo $message;
 						unset($message);
 						?>
-					</div>	
+					</div>
 					<div class="form-footer">
 						<button type="submit" class="btn btn-info">
 						<span class="glyphicon glyphicon-log-in"></span> Login
 						</button>
-					</div>	
+					</div>
 				</form>
 			</div>
 			<div class="loginbtn">

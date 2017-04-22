@@ -28,8 +28,6 @@ $(document).ready(function (){
         $("#register1").show();
         $("#login1").show();
         $("#cart12").hide();
-
-
     }
     else
     {
@@ -54,6 +52,25 @@ function loadData(movie) {
     }
     //------------
     ajax_call1(1);  // fethcing data from db
+}
+
+function removeFromCart(name){
+  //var username = '<?php echo $user_name ?>';
+  console.log(curr_user, name);
+  var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
+  $.ajax({
+      async: false,
+      url: 'http://localhost/php/update_cart.php',
+      type: 'post',
+      data: {user_name : curr_user, movie_name : name, action: 'delete' },
+      success:function(data){
+        $.get(showCartURL, function success(response) {
+          var jdata=$.parseJSON(response);
+          loadMovies(jdata);
+        });
+      },
+      error: function() { alert("error loading file");  }
+  });
 }
 
 function pagination(count2){
@@ -128,7 +145,11 @@ function parsing_data(){
                 var movie_image = "images/" + item.img;
                 var mov_name = '\'' + movie_name + '\'';
                 //alert(mov_name);
-                var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+                var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
+                if (true) {
+                  d3.append($('<button />', { "class":  "primary-btn delete_btn", text: "Delete"}));
+                }
+                d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
                     $('<div class="price-details">').append(
@@ -138,7 +159,6 @@ function parsing_data(){
                             $('<h4>').append($('<a onclick="addToCart(' + mov_name + ')">').text("Add to Cart"))),
                         $('<div class="clear">')
                     ));
-
                 if (i % 5 == 0) {
                     d2 = $('<div class="section group">');
                     $("#movie-page ").append(d2);
@@ -155,22 +175,21 @@ function parsing_data(){
 
 function addToCart(name){
     //alert(name);
-    if(curr_user == '')
-    {
+    if(curr_user == ''){
         alert("Login to enable Cart");
     }
     else {
         $.ajax({
             async: false,
-            url: 'http://localhost/php/cart_add.php',
+            url: 'http://localhost/php/update_cart.php',
             type: 'post',
             //dataType : "json",
-            data: {user_name: curr_user, movie_name: name},
-            success: function (data) {
+            data: {user_name : curr_user, movie_name : name, action: 'add' },
+            success:function(data) {
                 alert("Added to Cart Sucessfully!!")
             },
-            error: function () {
-                alert("error loading file");
+            error: function() {
+              alert("error loading file");
             }
         });
     }
