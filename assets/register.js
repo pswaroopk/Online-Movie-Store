@@ -1,5 +1,13 @@
 $('document').ready(function()
-{ 		 		
+{
+	// full name validation
+	var fullnameregex = /^[a-zA-Z ]{2,30}$/;
+	
+	$.validator.addMethod("validfullname", function ( value, element )
+	{
+		return this.optional( element ) || fullnameregex.test( value );
+	});
+	
 	// name validation
 	var nameregex = /^[a-zA-Z0-9]+$/;
 		 
@@ -24,38 +32,19 @@ $('document').ready(function()
 		return this.optional( element ) || passwordregex.test( value );
 	});
 	
-	$('#email').blur(function(){
-		var username = $('#email').val();
-		$.ajax({
-			url: "validate_username.php",
-			type: "post",
-			data: 'name=' + username,
-			
-			success: function(result)
-			{
-				if (result == "ok")
-				{
-					
-				}
-				else
-				{
-					alert("username already exists");
-				}
-			}
-		});
-	});
-	
 		 
 	$("#register-form").validate({				
 		rules:
 		{
-			name: {required: true, validname: true, minlength: 4},
+			fullname: {required: true, validfullname: true},
+			name: {required: true, validname: true},
 			email: {required: true, validemail: true},
 			password: {required: true, validpassword: true},
 			cpassword: {required: true, equalTo: '#password'},
 		},
 		messages:
 		{
+			fullname: {required: "Please enter Full Name", validfullname: "Name should be full name and last name"},
 			name: {required: "Please Enter User Name", validname: "Name must contain only alphabets and numbers", minlength: "Your Name is Too Short"},
 			email: {required: "Please Enter Email Address", validemail: "Enter Valid Email Address (abc@xyz.com)"},
 			password:{required: "Please Enter Password", validpassword: "Password must contain atleast one lowercase, uppercase, digit and have 8 characters"},

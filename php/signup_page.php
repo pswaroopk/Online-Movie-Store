@@ -3,15 +3,15 @@
 		<title>SignUp Form</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css" />
-		<link rel="stylesheet" href="assets/signup-form.css" type="text/css" />
-		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="css/slider.css" rel="stylesheet" type="text/css" media="all" />
-		<link href="css/front.css" rel="stylesheet" type="text/css" media="all" />
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="assets/jquery-1.11.2.min.js"></script>
-		<script src="assets/jquery.validate.min.js"></script>
-		<script src="assets/register.js"></script>
+		<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="../assets/signup-form.css" type="text/css" />
+		<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../css/slider.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../css/front.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
+		<script src="../assets/jquery-1.11.2.min.js"></script>
+		<script src="../assets/jquery.validate.min.js"></script>
+		<script src="../assets/register.js"></script>
 		<script type="text/javascript">
 			function checkname()
 			{
@@ -22,7 +22,7 @@
 						type: 'post',
 						url: 'php/checkuser.php',
 						data: {
-							user_name: username,
+							user_name: username
 						},
 						success: function (response)
 						{
@@ -52,18 +52,18 @@
 			<div class="wrap">
 				<div class="nav_list">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="contact.html">Sitemap</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="#">Home</a></li>
+<!--						<li><a href="../contact.html">Sitemap</a></li>-->
+						<li><a href="../contact.html">Contact</a></li>
 					</ul>
 				</div>
 				<div class="account_desc">
 					<ul>
 						<li><a href="#">Register</a></li>
-						<li><a href="login_page.php">Login</a></li>
-						<li><a href="preview.html">Delivery</a></li>
-						<li><a href="#">Checkout</a></li>
-						<li><a href="#">My Account</a></li>
+						<li><a href="login.php">Login</a></li>
+<!--						<li><a href="../preview.html">Delivery</a></li>-->
+						<li><a href="login.php">Checkout</a></li>
+						<li><a href="login.php">My Account</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -73,10 +73,10 @@
 	<br/><br/>
 		<div class="container">
 		<div class="logo">
-			<a href="index.html"><img src="logo.png" alt="" /></a>
+			<a href="../index.html"><img src="../logo.png" alt="" /></a>
 		</div>
 			<div class="signup-form-container">
-				<form method="post" role="form" id="register-form" autocomplete="off" action="php/user_signup.php">
+				<form method="post" role="form" id="register-form" autocomplete="off" action="user_signup.php">
 					<div class="form-header">
 						<h3 class="form-title"><i class="fa fa-user"></i> Sign Up</h3>		  
 						<div class="pull-right">
@@ -132,7 +132,7 @@
 			</div>
 			<div class="loginbtn">
 				<span>Already have an Account?</span>
-				<a href="login_page.php">Login</a>
+				<a href="login.php">Login</a>
 			</div>
 		</div>
 	</body>
