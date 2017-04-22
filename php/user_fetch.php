@@ -1,4 +1,10 @@
 <?php
 session_start();
-echo $_SESSION['user'];
+if (isset($_SESSION['username'])) {
+    echo $_SESSION['username'];
+}
+else
+{
+    echo null;
+}
 ?>

@@ -1,6 +1,7 @@
 <?php
-  $user_name = $_SESSION['user'];
-  $user_name = 'swaroop';//temporary hardcode
+session_start();
+  $user_name = $_SESSION['username'];
+//  $user_name = 'swaroop';//temporary hardcode
 
   if (isset($_GET['action'])) {
       switch ($_GET['action']) {
@@ -13,7 +14,7 @@
       }
   }
   function fetchMovies(){
-    $user_name = 'swaroop';
+    global $user_name;
     $sql_connect=mysqli_connect('localhost','root','root','movie_store');
     //SELECT * FROM cart INNER JOIN movies WHERE cart.Username='swaroop' and movies.Name=cart.Name
 

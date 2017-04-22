@@ -84,7 +84,7 @@
         <div class="wrap">
             <div class="nav_list">
                 <ul>
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.php">Home</a></li>
 <!--                    <li><a href="../contact.html">Sitemap</a></li>-->
                     <li><a href="../contact.html">Contact</a></li>
                 </ul>
@@ -104,7 +104,7 @@
     <div class="wrap">
         <div class="header_top">
             <div class="logo">
-                <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
+                <a href="../index.php"><img src="../images/logo.png" alt="" /></a>
             </div>
             <div class="header_top_right">
               <div class="cart">

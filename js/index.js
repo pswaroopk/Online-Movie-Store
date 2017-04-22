@@ -21,6 +21,24 @@ var curr_user;
 
 $(document).ready(function (){
     ajax_fetchUser();
+
+    if(curr_user==''){
+        $("#checkout").hide();
+        $("#logout").hide();
+        $("#register1").show();
+        $("#login1").show();
+        $("#cart12").hide();
+
+
+    }
+    else
+    {
+        $("#checkout").show();
+        $("#logout").show();
+        $("#register1").hide();
+        $("#login1").hide();
+        $("#cart12").show();
+    }
 });
 
 function loadData(movie) {
@@ -137,19 +155,25 @@ function parsing_data(){
 
 function addToCart(name){
     //alert(name);
-    $.ajax({
-        async: false,
-        url: 'http://localhost/php/cart_add.php',
-        type: 'post',
-        //dataType : "json",
-        data: {user_name : curr_user, movie_name : name },
-        success:function(data)
-        {
-            alert("Added to Cart Sucessfully!!")
-        },
-        error: function() { alert("error loading file");  }
-    });
-
+    if(curr_user == '')
+    {
+        alert("Login to enable Cart");
+    }
+    else {
+        $.ajax({
+            async: false,
+            url: 'http://localhost/php/cart_add.php',
+            type: 'post',
+            //dataType : "json",
+            data: {user_name: curr_user, movie_name: name},
+            success: function (data) {
+                alert("Added to Cart Sucessfully!!")
+            },
+            error: function () {
+                alert("error loading file");
+            }
+        });
+    }
 }
 
 function ajax_fetchUser(){

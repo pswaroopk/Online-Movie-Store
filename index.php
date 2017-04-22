@@ -1,3 +1,8 @@
+<?php
+session_start();
+//unset($_SESSION['username']);
+//(print_r($_SESSION['username'], TRUE));
+?>
 <!DOCTYPE HTML>
 
 <head>
@@ -27,18 +32,18 @@
 			<div class="wrap">
 				<div class="nav_list">
 					<ul>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="index.php">Home</a></li>
 						<!--<li><a href="contact.html">Sitemap</a></li>-->
 						<li><a href="contact.html">Contact</a></li>
 					</ul>
 				</div>
 				<div class="account_desc">
 					<ul>
-						<li><a href="php/signup_page.php">Register</a></li>
-						<li><a href="php/login.php">Login</a></li>
+						<li id="register1"><a href="php/signup_page.php">Register</a></li>
+						<li id="login1"><a href="php/login.php">Login</a></li>
 						<!--<li><a href="preview.html">Delivery</a></li>-->
-						<li><a href="php/show_cart.php">Checkout</a></li>
-						<li><a href="php/show_cart.php">My Account</a></li>
+						<li id="checkout"><a href="php/show_cart.php">Checkout</a></li>
+						<li id="logout"><a href="php/logout.php">Logout</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -47,10 +52,10 @@
 		<div class="wrap">
 			<div class="header_top">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo.png" alt="" /></a>
+					<a href="index.php"><img src="images/logo.png" alt="" /></a>
 				</div>
 				<div class="header_top_right">
-					<div class="cart">
+					<div class="cart" id="cart12">
 						<a href="php/show_cart.php">
 							<p><span>View Cart</span></p>
 						</a>
