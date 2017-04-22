@@ -1,19 +1,11 @@
 <?php
-$user_name = $_GET['name'];
-$user_name = 'swaroop';
-
-$sql_connect=mysqli_connect('localhost','root','root','movie_store');
-
-//SELECT * FROM cart INNER JOIN movies WHERE cart.Username='swaroop' and movies.Name=cart.Name
-$query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name'";
-$result=mysqli_query($sql_connect,$query);
-
-while($row=$result->fetch_assoc()){
-  // $table_data[]= array("id"=>$row['Id'],"category" =>$row['Category'],"name"=>$row['Name'],"year"=>$row['Year'],"img"=>$row['Img_url'],"cost"=>$row['Cost'],"desc"=>$row['Description']);
-    $table_data[]= $row;
- }
-$jdata = json_encode($table_data);
-error_log(print_r('', TRUE));
+  $user_name = $_GET['name'];
+  $user_name = 'swaroop';
+  // require_once(fetch_movies.php)
+  include 'fetch_movies.php';
+  $jdata = fetchMovies();
+  // echo $jdata;
+  error_log(print_r('', TRUE));
 ?>
 
 <!DOCTYPE HTML>
@@ -23,64 +15,67 @@ error_log(print_r('', TRUE));
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
-    <script type="text/javascript" src = "../js/index.js" ></script
+    <script type="text/javascript" src = "../js/index.js" ></script>
     <script type="text/javascript" src="../js/move-top.js"></script>
     <script type="text/javascript">
+      function loadMovies(jdata){
+        console.log(jdata);
+        var d2 = $('<div class="section group">');
+        $("#movie-page-cart").empty();
+        $(function () {
+            var d1 = $('<div class="content_top">').append(
+                $('<div class="heading">').append(
+                    $('<h3>').text('Your Movies')
+                ));
+            $("#movie-page-cart").append(d1);
+            $("#movie-page-cart").append(d2);
+        });
 
-      var data = '<?php echo $jdata ?>';
-      var jdata=$.parseJSON(data);
-      var d2 = $('<div class="section group">');
-      $("#movie-page-cart").empty();
-      $(function () {
-          var d1 = $('<div class="content_top">').append(
-              $('<div class="heading">').append(
-                  $('<h3>').text('Your Movies')
-              ));
-          $("#movie-page-cart").append(d1);
-          $("#movie-page-cart").append(d2);
-      });
+        if(jdata != 0) {
+            $.each(jdata, function (i, item) {
+                //var movie_cart = "preview.html";
+                var movie_cost = item.Cost;
+                var movie_name = item.Name;
+                var movie_image = "../images/" + item.Img_url;
+                var mov_name = '\'' + movie_name + '\'';
+                //alert(mov_name);
+                var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+                    $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
+                    $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
+                    $('<div class="price-details">').append(
+                        $('<div class="price-number">').append(
+                            $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
+                        $('<div class="add-cart">').append(
+                            $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
+                        $('<div class="clear">')
+                    ));
+                d2.append(d3);
 
-      if(jdata != 0) {
-          $.each(jdata, function (i, item) {
-              //var movie_cart = "preview.html";
-              var movie_cost = item.Cost;
-              var movie_name = item.Name;
-              var movie_image = "../images/" + item.Img_url;
-              var mov_name = '\'' + movie_name + '\'';
-              //alert(mov_name);
-              var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
-                  $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
-                  $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
-                  $('<div class="price-details">').append(
-                      $('<div class="price-number">').append(
-                          $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
-                      $('<div class="add-cart">').append(
-                          $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
-                      $('<div class="clear">')
-                  ));
-              d2.append(d3);
-
-          })
-      }
-      else{
-          $("#movie-page-cart").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
+            })
+        }
+        else{
+            $("#movie-page-cart").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
+        }
       }
 
       function removeFromCart(name){
         var username = '<?php echo $user_name ?>';
+        console.log(username, name);
+        var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
         $.ajax({
             async: false,
             url: 'http://localhost/php/delete_cart.php',
             type: 'post',
             data: {user_name : username, movie_name : name },
             success:function(data){
-              window.location.href = 'show_cart.php';
+              $.get(showCartURL, function success(response) {
+                var jdata=$.parseJSON(response);
+                loadMovies(jdata);
+              });
             },
             error: function() { alert("error loading file");  }
         });
       }
-
-
     </script>
 </head>
 <body>
@@ -112,10 +107,14 @@ error_log(print_r('', TRUE));
                 <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
             </div>
             <div class="header_top_right">
-                <div class="cart">
-                    <p><span>View Cart</span>
-                    </p>
-                </div>
+              <div class="cart">
+                <p><span>Check out</span></p>
+                  <a href="#"></a>
+              </div>
+              <div class="cart">
+                <p><span>Empty Cart</span></p>
+                <a href="#"></a>
+              </div>
                 <div class="clear"></div>
             </div>
             <script type="text/javascript">
@@ -153,6 +152,14 @@ error_log(print_r('', TRUE));
     <div class="wrap">
       <div class="content" id="cont1">
         <div class="content" id="movie-page-cart">
+          <script type="text/javascript">
+            $(document).ready(function(){
+              var data = '<?php echo $jdata ?>';
+              var jdata=$.parseJSON(data);
+              loadMovies(jdata);
+            });
+
+          </script>
         </div>
       </div>
     </div>
