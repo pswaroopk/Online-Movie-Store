@@ -20,11 +20,11 @@ if (!empty($fullname) && !empty($username) && !empty($email) && !empty($password
 	$result = mysqli_query($conn, $sql);
 	if ($result)
 	{
-		header('Location: ../login_page.php');
+		header('Location: http://localhost/php/login.php');
 	}
 	else
 	{
-		header('Location: ../signup_page.php');
+		header('Location: http://localhost/php/signup_page.php');
 	}	
 }
 
