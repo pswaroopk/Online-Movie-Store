@@ -1,32 +1,15 @@
 <!DOCTYPE HTML>
+
 <head>
 	<title>Movies Store Website</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css" />
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="js/move-top.js"></script>
 	<script type="text/javascript" src="js/easing.js"></script>
-	<script type="text/javascript" src = "js/index.js" ></script>
-	<!-- <script type="text/javascript">
-		$(document).ready(function(){
-			$('#load').click(function(){
-				var a = document.getElementById('movieName').value;
-				var b = document.getElementById('category').value;
-				var c = document.getElementById('year').value;
-				var d = document.getElementById('cost').value;
-				var e = document.getElementById('movie_description').value;
-				if ((a != null || a != "") && (b != null || b != "") && (c != null || c != "") &&
-						(d != null || d != "") && (e != null || e != ""))
-				{
-					alert("All are filled");
-				}
-				else {
-					alert("All the fields are required");
-				}
-			});
-		});
-	</script> -->
+	<script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
@@ -46,7 +29,7 @@
 						<li id="login1"><a href="php/login.php">Login</a></li>
 						<!--<li><a href="preview.html">Delivery</a></li>-->
 						<li id="checkout"><a href="php/show_cart.php">Checkout</a></li>
-						<li id="logout"><a href="php/show_cart.php">My Account</a></li>
+						<li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -64,9 +47,9 @@
 						</a>
 					</div>
 					<!--<div class="search_box">-->
-						<!--<form>-->
-							<!--<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">-->
-						<!--</form>-->
+					<!--<form>-->
+					<!--<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">-->
+					<!--</form>-->
 					<!--</div>-->
 					<div class="clear"></div>
 				</div>

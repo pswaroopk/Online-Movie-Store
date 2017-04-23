@@ -33,10 +33,15 @@ else
     $dbpassword = $row['Password'];
     $dbusername = $row['Username'];
     $dbfullname = $row['Name'];
+    $dbIsAdmin = $row['IsAdmin'];
     if (($password == $dbpassword) && ($username == $dbusername))
     {
         $_SESSION['username'] = $dbusername;
         $_SESSION['fullname'] = $dbfullname;
+        if($dbIsAdmin == 1)
+          $_SESSION['admin'] = 'true';
+        else
+          $_SESSION['admin'] = 'false';
 
         header('Location: ../index.php');
     }

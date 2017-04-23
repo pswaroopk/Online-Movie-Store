@@ -17,7 +17,8 @@ var movie_category;
 var movie_count;
 var jdata;
 var movie_name;
-var curr_user;
+var curr_user='';
+var admin='false';
 
 $(document).ready(function (){
     ajax_fetchUser();
@@ -28,19 +29,38 @@ $(document).ready(function (){
         $("#register1").show();
         $("#login1").show();
         $("#cart12").hide();
-
-
+        $("#user").text('Guest');
     }
     else
     {
+        $("#tmp").text('');
         $("#checkout").show();
         $("#logout").show();
+        $("#user").text(curr_user);
         $("#register1").hide();
         $("#login1").hide();
         $("#cart12").show();
     }
 });
 
+function removeUser(){
+  // $("#logout").empty().append($('<a href="php/login.php>').text("Login"));
+  $("#logout").hide();
+  $("#login1").show();
+  $("#user").text('Guest');
+  $.ajax({
+      // async: false,
+      url: 'http://localhost/php/logout.php',
+      type:'post',
+      success:function (data) {
+          alert("Logged Out successfully");
+          window.location = '../index.php';
+      },
+      error: function() { console.log('error logging out');  }
+  })
+
+
+}
 function loadData(movie) {
 
     movie_category = movie;
@@ -55,6 +75,64 @@ function loadData(movie) {
     //------------
     ajax_call1(1);  // fethcing data from db
 }
+
+
+// function loadMovies(jdata){
+//
+//   console.log(jdata);
+//   var d2 = $('<div class="section group">');
+//   $("#movie-page-cart").empty();
+//   $(function () {
+//       var d1 = $('<div class="content_top">').append(
+//           $('<div class="heading">').append(
+//               $('<h3>').text('Your Movies')
+//           ));
+//       $("#movie-page-cart").append(d1);
+//       $("#movie-page-cart").append(d2);
+//   });
+//   if(Object.keys(jdata).length === 0 && obj.constructor === Object)
+//   //if(jdata != 0) {
+//       $.each(jdata, function (i, item) {
+//           var movie_cost = item.Cost;
+//           var movie_name = item.Name;
+//           var movie_image = "../images/" + item.Img_url;
+//           var mov_name = '\'' + movie_name + '\'';
+//           var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+//               $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
+//               $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
+//               $('<div class="price-details">').append(
+//                   $('<div class="price-number">').append(
+//                       $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
+//                   $('<div class="add-cart">').append(
+//                       $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
+//                   $('<div class="clear">')
+//               ));
+//           d2.append(d3);
+//       })
+//   }
+//   else{
+//       $("#movie-page-cart").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
+//   }
+// }
+
+// function removeFromCart(name){
+//   //var username = '<?php echo $user_name ?>';
+//   console.log(curr_user, name);
+//   var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
+//   $.ajax({
+//       async: false,
+//       url: 'http://localhost/php/update_cart.php',
+//       type: 'post',
+//       data: {user_name : curr_user, movie_name : name, action: 'delete' },
+//       success:function(data){
+//         $.get(showCartURL, function success(response) {
+//           var jdata=$.parseJSON(response);
+//           loadMovies(jdata);
+//         });
+//       },
+//       error: function() { alert("error loading file");  }
+//   });
+// }
 
 function pagination(count2){
     var count1 = count2/10;
@@ -128,7 +206,12 @@ function parsing_data(){
                 var movie_image = "images/" + item.img;
                 var mov_name = '\'' + movie_name + '\'';
                 //alert(mov_name);
-                var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+
+                var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
+                if (admin=='true') {
+                  d3.append($('<button />', { "class":  "primary-btn delete_btn", text: "Delete"}));
+                }
+                d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
                     $('<div class="price-details">').append(
@@ -154,10 +237,10 @@ function parsing_data(){
 }
 
 function addToCart(name){
-    //alert(name);
-    if(curr_user == '')
-    {
-        alert("Login to enable Cart");
+
+    if(curr_user == ''){
+        window.location = 'http://localhost/php/user_login.php';
+        // alert("Login to enable Cart");
     }
     else {
         $.ajax({
@@ -183,8 +266,11 @@ function ajax_fetchUser(){
         url: "http://localhost/php/user_fetch.php",
         cache: false,
         success: function(data){
-            //alert(data);
-            curr_user = data;
+            if(data != ''){
+              var user = $.parseJSON(data);
+                curr_user = user.username;
+                admin = user.admin;
+            }
         }
     });
 }

@@ -12,7 +12,7 @@ session_start();
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/slider.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="css/front.css" rel="stylesheet" type="text/css" media="all" />
-	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="js/move-top.js"></script>
 	<script type="text/javascript" src="js/easing.js"></script>
 	<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
@@ -43,7 +43,8 @@ session_start();
 						<li id="login1"><a href="php/login.php">Login</a></li>
 						<!--<li><a href="preview.html">Delivery</a></li>-->
 						<li id="checkout"><a href="php/show_cart.php">Checkout</a></li>
-						<li id="logout"><a href="php/logout.php">Logout</a></li>
+						<li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
+						<li id="user-list"><a id="user" href=#>Guest</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -155,7 +156,7 @@ session_start();
 									<p><span class="rupees">$620.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('End Game')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('End Game')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -168,7 +169,7 @@ session_start();
 									<p><span class="rupees">$620.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Sorority Wars')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Sorority Wars')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -182,7 +183,7 @@ session_start();
 									<p><span class="rupees">$899.75</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('New Moon')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('New Moon')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -196,7 +197,7 @@ session_start();
 									<p><span class="rupees">$599.00</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Avatar')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Avatar')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -209,27 +210,12 @@ session_start();
 									<p><span class="rupees">$679.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Black Swan')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Black Swan')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
 						</div>
-					</div>
-					<!--<div class="section group">-->
-						<!--<div class="grid_1_of_5 images_1_of_5">-->
-							<!--<a href="preview.html"><img src="images/end-game.jpg" alt="" /></a>-->
-							<!--<h2><a href="preview.html">End Game</a></h2>-->
-							<!--<div class="price-details">-->
-								<!--<div class="price-number">-->
-									<!--<p><span class="rupees">$620.87</span></p>-->
-								<!--</div>-->
-								<!--<div class="add-cart">-->
-									<!--<h4><a href="preview.html">Add to Cart</a></h4>-->
-								<!--</div>-->
-								<!--<div class="clear"></div>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</div>-->
+					</div>				
 					<div class="content_bottom">
 						<div class="heading">
 							<h3>Feature Products</h3>
@@ -244,7 +230,7 @@ session_start();
 									<p><span class="rupees">$620.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Beauty and the beast')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Beauty and the beast')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -258,7 +244,7 @@ session_start();
 									<p><span class="rupees">$620.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Eclipse')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Eclipse')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -272,7 +258,7 @@ session_start();
 									<p><span class="rupees">$899.75</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Coraline')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Coraline')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -286,7 +272,7 @@ session_start();
 									<p><span class="rupees">$599.00</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Unstoppable')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Unstoppable')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -299,7 +285,7 @@ session_start();
 									<p><span class="rupees">$679.87</span></p>
 								</div>
 								<div class="add-cart">
-									<h4><a onclick="addToCart('Priest')">Add to Cart</a></h4>
+									<h4><a href=# onclick="addToCart('Priest')">Add to Cart</a></h4>
 								</div>
 								<div class="clear"></div>
 							</div>
