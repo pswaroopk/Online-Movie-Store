@@ -1,26 +1,32 @@
 <!DOCTYPE HTML>
-
 <head>
-	<title> Movies Store Website </title>
+	<title>Movies Store Website</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/slider.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="css/front.css" rel="stylesheet" type="text/css" media="all" />
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css" />
 	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
 	<script type="text/javascript" src="js/move-top.js"></script>
 	<script type="text/javascript" src="js/easing.js"></script>
-	<script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-	<script type="text/javascript" src="js/index.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-
-
-	<script type="text/javascript">
-		$(window).load(function() {
-			$('#slider').nivoSlider();
+	<script type="text/javascript" src = "js/index.js" ></script>
+	<!-- <script type="text/javascript">
+		$(document).ready(function(){
+			$('#load').click(function(){
+				var a = document.getElementById('movieName').value;
+				var b = document.getElementById('category').value;
+				var c = document.getElementById('year').value;
+				var d = document.getElementById('cost').value;
+				var e = document.getElementById('movie_description').value;
+				if ((a != null || a != "") && (b != null || b != "") && (c != null || c != "") &&
+						(d != null || d != "") && (e != null || e != ""))
+				{
+					alert("All are filled");
+				}
+				else {
+					alert("All the fields are required");
+				}
+			});
 		});
-	</script>
+	</script> -->
 </head>
 
 <body>
@@ -40,7 +46,7 @@
 						<li id="login1"><a href="php/login.php">Login</a></li>
 						<!--<li><a href="preview.html">Delivery</a></li>-->
 						<li id="checkout"><a href="php/show_cart.php">Checkout</a></li>
-						<li id="logout"><a href="php/logout.php">Logout</a></li>
+						<li id="logout"><a href="php/show_cart.php">My Account</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -57,164 +63,80 @@
 							<p><span>View Cart</span></p>
 						</a>
 					</div>
-					<div class="search_box">
-						<form onsubmit="search(); return false;">
-							<input id="search1" type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">
-						</form>
-					</div>
+					<!--<div class="search_box">-->
+						<!--<form>-->
+							<!--<input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}"><input type="submit" value="">-->
+						<!--</form>-->
+					<!--</div>-->
 					<div class="clear"></div>
-				</div>
-				<script type="text/javascript">
-					function DropDown(el) {
-						this.dd = el;
-						this.initEvents();
-					}
-					DropDown.prototype = {
-						initEvents: function() {
-							var obj = this;
-
-							obj.dd.on('click', function(event) {
-								$(this).toggleClass('active');
-								event.stopPropagation();
-							});
-						}
-					}
-
-					$(function() {
-
-						var dd = new DropDown($('#dd'));
-
-						$(document).click(function() {
-							// all dropdowns
-							$('.wrapper-dropdown-2').removeClass('active');
-						});
-
-					});
-				</script>
-				<div class="clear"></div>
-			</div>
-			<div class="header_bottom">
-				<div class="header_bottom_left">
-					<div class="categories">
-						<ul id="ul_id_1">
-							<h3>Categories</h3>
-							<li><a onclick="loadData('All')">All</a></li>
-							<li><a onclick="loadData('Hindi')">Hindi</a></li>
-							<li><a onclick="loadData('Telugu')">Telugu</a></li>
-							<li><a onclick="loadData('Tamil')">Tamil</a></li>
-							<li><a onclick="loadData('English')">English</a></li>
-							<li><a onclick="loadData('French')">French</a></li>
-							<!--<li><a onclick="loadData()">Kannada</a></li>-->
-							<!--<li><a href="#">Bengali</a></li>-->
-							<!--<li><a href="#">Assami</a></li>-->
-							<!--<li><a href="#">Kids</a></li>-->
-							<!--<li><a href="#">Animation</a></li>-->
-							<!--<li><a href="#">Games</a></li>-->
-						</ul>
-					</div>
-				</div>
-				<div class="header_bottom_right">
-					<!------ Slider ------------>
-					<div class="slider">
-						<div class="slider-wrapper theme-default">
-							<div id="slider" class="nivoSlider">
-								<img src="images/1.jpg" data-thumb="images/1.jpg" alt="" />
-								<img src="images/2.jpg" data-thumb="images/2.jpg" alt="" />
-								<img src="images/3.jpg" data-thumb="images/3.jpg" alt="" />
-								<img src="images/4.jpg" data-thumb="images/4.jpg" alt="" />
-								<img src="images/5.jpg" data-thumb="images/5.jpg" alt="" />
-							</div>
-						</div>
-					</div>
-					<!------End Slider ------------>
 				</div>
 				<div class="clear"></div>
 			</div>
 		</div>
 	</div>
-	<!------------End Header ------------>
-
-
-
 	<div class="main">
 		<div class="wrap">
-			<div class="content" id="cont1">
-				<div class="addmovie">
-					<div class="content_top">
-						<div class="heading">
-							<h3>Add a new movie </h3>
+			<div class="content">
+				<div class="section group">
+					<div class="col span_2_of_3">
+						<div class="contact-form">
+							<h2>Update Movies Database</h2>
+							<form method="post" name="form" action="addMovie.php" enctype="multipart/form-data">
+								<div class="form-group">
+									<span><label>Movie Name</label></span>
+									<span><input name="movieName" type="text" class="textbox" id="movieName"></span>
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<span><label>Category</label></span>
+									<span><input name="category" type="text" class="textbox" id="category"></span>
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<span><label>Image</label></span>
+									<input type="file" id="imgFile" name="image">
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<span><label>Year</label></span>
+									<span><input name="year" type="text" class="textbox" id="year"></span>
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<span><label>Price</label></span>
+									<span><input name="cost" type="text" class="textbox" id="cost"></span>
+									<span class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<span><label>Description</label></span>
+									<span><textarea name="movie_description" id="movie_description"> </textarea></span>
+									<span class="help-block"></span>
+								</div>
+								<div>
+									<span><input type="submit" value="Submit"  class="mybutton" id="load"></span>
+								</div>
+							</form>
 						</div>
 					</div>
-					<form>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-							<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Password</label>
-							<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-						</div>
-						<div class="form-group">
-							<label for="exampleSelect1">Example select</label>
-							<select class="form-control" id="exampleSelect1">
-					      <option>1</option>
-					      <option>2</option>
-					      <option>3</option>
-					      <option>4</option>
-					      <option>5</option>
-					    </select>
-						</div>
-						<div class="form-group">
-							<label for="exampleSelect2">Example multiple select</label>
-							<select multiple class="form-control" id="exampleSelect2">
-					      <option>1</option>
-					      <option>2</option>
-					      <option>3</option>
-					      <option>4</option>
-					      <option>5</option>
-					    </select>
-						</div>
-						<div class="form-group">
-							<label for="exampleTextarea">Example textarea</label>
-							<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputFile">File input</label>
-							<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-							<small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-						</div>
-						<fieldset class="form-group">
-							<legend>Radio buttons</legend>
-							<div class="form-check">
-								<label class="form-check-label">
-					        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-					        Option one is this and that&mdash;be sure to include why it's great
-					      </label>
+					<!-- <div class="col span_1_of_3">
+						<div class="contact_info">
+							<h2>Find Us Here</h2>
+							<div class="map">
+								<iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265" style="color:#888;text-align:left;font-size:0.85em">View Larger Map</a></small>
 							</div>
-							<div class="form-check">
-								<label class="form-check-label">
-					        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
-					        Option two can be something else and selecting it will deselect option one
-					      </label>
-							</div>
-							<div class="form-check disabled">
-								<label class="form-check-label">
-					        <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-					        Option three is disabled
-					      </label>
-							</div>
-						</fieldset>
-						<div class="form-check">
-							<label class="form-check-label">
-					      <input type="checkbox" class="form-check-input">
-					      Check me out
-					    </label>
 						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+						<div class="company_address">
+							<h2>Information :</h2>
+							<p>University of Texas At Dallas</p>
+							<p>Dallas, Texas , 75252</p>
+							<p>USA</p>
+							<p>Phone:(00) 222 666 444</p>
+							<p>Fax: (000) 000 00 00 0</p>
+							<p>Email: <span><a href="#">info(at)mycompany.com</a></span></p>
+							<p>Follow on: <span><a href="#">Facebook</a></span>, <span><a href="#">Twitter</a></span></p>
+						</div>
+					</div> -->
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -237,7 +159,7 @@
 						<li><a href="#">About Us</a></li>
 						<li><a href="#">Customer Service</a></li>
 						<li><a href="#">Privacy Policy</a></li>
-						<li><a href="#l">Site Map</a></li>
+						<li><a href="#">Site Map</a></li>
 						<li><a href="#">Search Terms</a></li>
 					</ul>
 				</div>
