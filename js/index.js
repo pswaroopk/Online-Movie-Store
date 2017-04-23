@@ -41,6 +41,12 @@ $(document).ready(function (){
         $("#login1").hide();
         $("#cart12").show();
     }
+    if(admin == "true"){
+      $("#add-movie").show();
+    }else{
+      $("#add-movie").hide();
+    }
+
 });
 
 function removeUser(){
@@ -48,6 +54,7 @@ function removeUser(){
   $("#logout").hide();
   $("#login1").show();
   $("#user").text('Guest');
+  $("add-movie").hide();
   $.ajax({
       // async: false,
       url: 'http://localhost/php/logout.php',
@@ -294,13 +301,8 @@ function search(){
         type: 'post',
         //dataType : "json",
         data: {movie_name : p.value },
-        success:function(data)
-        {
-
+        success:function(data){
             jdata = $.parseJSON(data);
-
-
-
         },
         error: function() { alert("error loading file");  }
     });

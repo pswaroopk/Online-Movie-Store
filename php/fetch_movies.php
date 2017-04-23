@@ -18,7 +18,7 @@ session_start();
     $sql_connect=mysqli_connect('localhost','root','root','movie_store');
     //SELECT * FROM cart INNER JOIN movies WHERE cart.Username='swaroop' and movies.Name=cart.Name
 
-    $query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name'";
+    $query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name' AND cart.flag=1";
     $result=mysqli_query($sql_connect,$query);
     // echo $query;
     while($row=$result->fetch_assoc()){
@@ -35,7 +35,7 @@ session_start();
     $sql_connect=mysqli_connect('localhost','root','root','movie_store');
     //SELECT * FROM cart INNER JOIN movies WHERE cart.Username='swaroop' and movies.Name=cart.Name
 
-    $query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name'";
+    $query = "SELECT movies.Name, Cost, Img_url FROM cart INNER JOIN movies ON movies.Name=cart.Name WHERE cart.Username='$user_name' AND cart.flag=1";
     $result=mysqli_query($sql_connect,$query);
     // echo $query;
     while($row=$result->fetch_assoc()){

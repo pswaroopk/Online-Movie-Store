@@ -1,17 +1,10 @@
 <?php
-<<<<<<< Updated upstream
-  $user_name = $_GET['name'];
-  $user_name = 'swaroop';
-  // require_once(fetch_movies.php)
-=======
+
   session_start();
   $user_name = $_SESSION['username'];
   $admin = $_SESSION['admin'];
-  // $user_name = 'swaroop';
->>>>>>> Stashed changes
   include 'fetch_movies.php';
   $jdata = fetchMovies();
-  // echo $jdata;
   error_log(print_r('', TRUE));
 ?>
 
