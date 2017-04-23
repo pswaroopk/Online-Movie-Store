@@ -39,6 +39,7 @@ session_start();
 				</div>
 				<div class="account_desc">
 					<ul>
+						<li id="add-movie"><a href="../admin.html">Add-a-movie</a></li>
 						<li id="register1"><a href="php/signup_page.php">Register</a></li>
 						<li id="login1"><a href="php/login.php">Login</a></li>
 						<!--<li><a href="preview.html">Delivery</a></li>-->
@@ -215,7 +216,7 @@ session_start();
 								<div class="clear"></div>
 							</div>
 						</div>
-					</div>				
+					</div>
 					<div class="content_bottom">
 						<div class="heading">
 							<h3>Feature Products</h3>
