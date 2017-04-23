@@ -101,12 +101,12 @@ session_start();
 					<div class="categories">
 						<ul id="ul_id_1">
 							<h3>Categories</h3>
-							<li><a onclick="loadData('All')" href=#>All</a></li>
-							<li><a onclick="loadData('Hindi')" href=#>Hindi</a></li>
-							<li><a onclick="loadData('Telugu')" href=#>Telugu</a></li>
-							<li><a onclick="loadData('Tamil')" href=#>Tamil</a></li>
-							<li><a onclick="loadData('English')" href=#>English</a></li>
-							<li><a onclick="loadData('French')" href=#>French</a></li>
+							<li><a onclick="loadData('All')">All</a></li>
+							<li><a onclick="loadData('Hindi')">Hindi</a></li>
+							<li><a onclick="loadData('Telugu')">Telugu</a></li>
+							<li><a onclick="loadData('Tamil')">Tamil</a></li>
+							<li><a onclick="loadData('English')">English</a></li>
+							<li><a onclick="loadData('French')">French</a></li>
 							<!--<li><a onclick="loadData()">Kannada</a></li>-->
 							<!--<li><a href="#">Bengali</a></li>-->
 							<!--<li><a href="#">Assami</a></li>-->

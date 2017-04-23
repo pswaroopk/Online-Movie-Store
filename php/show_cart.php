@@ -1,8 +1,10 @@
 <?php
-  $user_name = $_GET['username'];
-  // $user_name = 'swaroop';
+  $user_name = $_GET['name'];
+  $user_name = 'swaroop';
+  // require_once(fetch_movies.php)
   include 'fetch_movies.php';
   $jdata = fetchMovies();
+  // echo $jdata;
   error_log(print_r('', TRUE));
 ?>
 
@@ -31,10 +33,12 @@
 
         if(jdata != 0) {
             $.each(jdata, function (i, item) {
+                //var movie_cart = "preview.html";
                 var movie_cost = item.Cost;
                 var movie_name = item.Name;
                 var movie_image = "../images/" + item.Img_url;
                 var mov_name = '\'' + movie_name + '\'';
+                //alert(mov_name);
                 var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
@@ -46,6 +50,7 @@
                         $('<div class="clear">')
                     ));
                 d2.append(d3);
+
             })
         }
         else{
@@ -53,24 +58,24 @@
         }
       }
 
-      // function removeFromCart(name){
-      //   var username = '<?php echo $user_name ?>';
-      //   console.log(username, name);
-      //   var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
-      //   $.ajax({
-      //       async: false,
-      //       url: 'http://localhost/php/update_cart.php',
-      //       type: 'post',
-      //       data: {user_name : username, movie_name : name, action: 'delete' },
-      //       success:function(data){
-      //         $.get(showCartURL, function success(response) {
-      //           var jdata=$.parseJSON(response);
-      //           loadMovies(jdata);
-      //         });
-      //       },
-      //       error: function() { alert("error loading file");  }
-      //   });
-      // }
+      function removeFromCart(name){
+        var username = '<?php echo $user_name ?>';
+        console.log(username, name);
+        var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
+        $.ajax({
+            async: false,
+            url: 'http://localhost/php/delete_cart.php',
+            type: 'post',
+            data: {user_name : username, movie_name : name },
+            success:function(data){
+              $.get(showCartURL, function success(response) {
+                var jdata=$.parseJSON(response);
+                loadMovies(jdata);
+              });
+            },
+            error: function() { alert("error loading file");  }
+        });
+      }
     </script>
 </head>
 <body>
