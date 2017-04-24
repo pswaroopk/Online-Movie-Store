@@ -1,6 +1,8 @@
 <?php
 
-$movie_name = $_POST['movie_name'];
+if(isset( $_POST['movie_name'] )){
+  $movie_name = $_POST['movie_name'];
+}
 $user_name = $_POST['user_name'];
 $action = $_POST['action'];
 session_start();
@@ -8,6 +10,9 @@ session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
 if($action=='add'){
   $query = "INSERT INTO cart VALUES ('$user_name', '$movie_name', 1) ON DUPLICATE KEY UPDATE flag=1;";
+}
+else if($action=='empty'){
+  $query = "UPDATE cart SET flag=0 WHERE Username='$user_name'";
 }
 else{
   $query = "UPDATE cart SET flag=0 WHERE Username='$user_name' AND Name='$movie_name'" ;

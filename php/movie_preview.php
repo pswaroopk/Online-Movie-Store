@@ -61,16 +61,14 @@ while($row=$result1->fetch_assoc())
             <div class="nav_list">
                 <ul>
                     <li><a href="../index.php">Home</a></li>
-<!--                    <li><a href="../contact.html">Sitemap</a></li>-->
                     <li><a href="../contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="account_desc">
                 <ul>
+                    <li id="add-movie"><a href="../admin.html">Add-a-movie</a></li>
                     <li id="register1"><a href="signup_page.php">Register</a></li>
                     <li id="login1"><a href="login.php">Login</a></li>
-<!--                    <li><a href="../preview.html">Delivery</a></li>-->
-                    <!-- <li id="checkout"><a href="show_cart.php">Checkout</a></li> -->
                     <li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
                     <li id="user-list"><a id="user" href=#>Guest</a></li>
                 </ul>

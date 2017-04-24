@@ -42,7 +42,6 @@ session_start();
 						<li id="add-movie"><a href="../admin.html">Add-a-movie</a></li>
 						<li id="register1"><a href="php/signup_page.php">Register</a></li>
 						<li id="login1"><a href="php/login.php">Login</a></li>
-						<!--<li><a href="preview.html">Delivery</a></li>-->
 						<li id="checkout"><a href="php/show_cart.php">Checkout</a></li>
 						<li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
 						<li id="user-list"><a id="user" href=#>Guest</a></li>
@@ -86,14 +85,10 @@ session_start();
 					}
 
 					$(function() {
-
 						var dd = new DropDown($('#dd'));
-
 						$(document).click(function() {
-							// all dropdowns
 							$('.wrapper-dropdown-2').removeClass('active');
 						});
-
 					});
 				</script>
 				<div class="clear"></div>
@@ -103,18 +98,12 @@ session_start();
 					<div class="categories">
 						<ul id="ul_id_1">
 							<h3>Categories</h3>
-							<li><a onclick="loadData('All')">All</a></li>
-							<li><a onclick="loadData('Hindi')">Hindi</a></li>
-							<li><a onclick="loadData('Telugu')">Telugu</a></li>
-							<li><a onclick="loadData('Tamil')">Tamil</a></li>
-							<li><a onclick="loadData('English')">English</a></li>
-							<li><a onclick="loadData('French')">French</a></li>
-							<!--<li><a onclick="loadData()">Kannada</a></li>-->
-							<!--<li><a href="#">Bengali</a></li>-->
-							<!--<li><a href="#">Assami</a></li>-->
-							<!--<li><a href="#">Kids</a></li>-->
-							<!--<li><a href="#">Animation</a></li>-->
-							<!--<li><a href="#">Games</a></li>-->
+							<li><a href=# onclick="loadData('All')">All</a></li>
+							<li><a href=# onclick="loadData('Hindi')">Hindi</a></li>
+							<li><a href=# onclick="loadData('Telugu')">Telugu</a></li>
+							<li><a href=# onclick="loadData('Tamil')">Tamil</a></li>
+							<li><a href=# onclick="loadData('English')">English</a></li>
+							<li><a href=# onclick="loadData('French')">French</a></li>
 						</ul>
 					</div>
 				</div>
@@ -219,7 +208,7 @@ session_start();
 					</div>
 					<div class="content_bottom">
 						<div class="heading">
-							<h3>Feature Products</h3>
+							<h3>Featured Products</h3>
 						</div>
 					</div>
 					<div class="section group">

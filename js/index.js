@@ -1,18 +1,6 @@
 /**
  * Created by asrirang on 4/8/17.
  */
-
-// function loadData()
-// {
-//     $("#ul_id_1 li").click(function() {
-//
-//         movie_catogery = $(this).text() ; // gets text contents of clicked li
-//         alert(movie_catogery);
-//         loadData1();
-//     });
-//
-// }
-
 var movie_category;
 var movie_count;
 var jdata;
@@ -65,9 +53,8 @@ function removeUser(){
       },
       error: function() { console.log('error logging out');  }
   })
-
-
 }
+
 function loadData(movie) {
 
     movie_category = movie;
@@ -82,64 +69,6 @@ function loadData(movie) {
     //------------
     ajax_call1(1);  // fethcing data from db
 }
-
-
-// function loadMovies(jdata){
-//
-//   console.log(jdata);
-//   var d2 = $('<div class="section group">');
-//   $("#movie-page-cart").empty();
-//   $(function () {
-//       var d1 = $('<div class="content_top">').append(
-//           $('<div class="heading">').append(
-//               $('<h3>').text('Your Movies')
-//           ));
-//       $("#movie-page-cart").append(d1);
-//       $("#movie-page-cart").append(d2);
-//   });
-//   if(Object.keys(jdata).length === 0 && obj.constructor === Object)
-//   //if(jdata != 0) {
-//       $.each(jdata, function (i, item) {
-//           var movie_cost = item.Cost;
-//           var movie_name = item.Name;
-//           var movie_image = "../images/" + item.Img_url;
-//           var mov_name = '\'' + movie_name + '\'';
-//           var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
-//               $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
-//               $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
-//               $('<div class="price-details">').append(
-//                   $('<div class="price-number">').append(
-//                       $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
-//                   $('<div class="add-cart">').append(
-//                       $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
-//                   $('<div class="clear">')
-//               ));
-//           d2.append(d3);
-//       })
-//   }
-//   else{
-//       $("#movie-page-cart").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
-//   }
-// }
-
-// function removeFromCart(name){
-//   //var username = '<?php echo $user_name ?>';
-//   console.log(curr_user, name);
-//   var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
-//   $.ajax({
-//       async: false,
-//       url: 'http://localhost/php/update_cart.php',
-//       type: 'post',
-//       data: {user_name : curr_user, movie_name : name, action: 'delete' },
-//       success:function(data){
-//         $.get(showCartURL, function success(response) {
-//           var jdata=$.parseJSON(response);
-//           loadMovies(jdata);
-//         });
-//       },
-//       error: function() { alert("error loading file");  }
-//   });
-// }
 
 function pagination(count2){
     var count1 = count2/10;
@@ -206,17 +135,21 @@ function parsing_data(){
     if(jdata != 0) {
         $.each(jdata, function (i, item) {
             if (i < 10) {
-                //var movie_cart = "preview.html";
                 var movie_cost = item.cost;
                 var movie_name = item.name;
-                //var movie_page = 'preview.html';
                 var movie_image = "images/" + item.img;
                 var mov_name = '\'' + movie_name + '\'';
-                //alert(mov_name);
 
                 var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
-                if (admin=='true') {
-                  d3.append($('<button />', { "class":  "primary-btn delete_btn", text: "Delete"}));
+                if (admin == 'true') {
+                  d3.append($('<div class="delete_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))),
+                    $('<div class="clear">')
+                  );
+                  d3.append($('<div class="update_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="#">').text("Update"))),
+                    $('<div class="clear">')
+                  );
                 }
                 d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
@@ -225,7 +158,7 @@ function parsing_data(){
                         $('<div class="price-number">').append(
                             $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
                         $('<div class="add-cart">').append(
-                            $('<h4>').append($('<a onclick="addToCart(' + mov_name + ')">').text("Add to Cart"))),
+                            $('<h4>').append($('<a href=# onclick="addToCart(' + mov_name + ')">').text("Add to Cart"))),
                         $('<div class="clear">')
                     ));
 
@@ -247,15 +180,14 @@ function addToCart(name){
 
     if(curr_user == ''){
         window.location = 'http://localhost/php/user_login.php';
-        // alert("Login to enable Cart");
     }
     else {
         $.ajax({
             async: false,
-            url: 'http://localhost/php/cart_add.php',
+            url: 'http://localhost/php/update_cart.php',
             type: 'post',
             //dataType : "json",
-            data: {user_name: curr_user, movie_name: name},
+            data: {user_name: curr_user, movie_name: name, action: 'add'},
             success: function (data) {
                 alert("Added to Cart Sucessfully!!")
             },
@@ -286,6 +218,17 @@ function movie_preview(name1){
     window.location.replace('http://localhost/php/movie_preview.php?name=' + name1);
 }
 
+
+function checkOut(){
+  alert('Thanks for shopping with us!');
+  window.location = '../index.php';
+}
+
+
+function updateMovie(name){
+  //call search php or search method
+  //populate admin.html page
+}
 function search(){
 
     var p = document.getElementById('search1');

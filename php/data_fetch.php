@@ -9,13 +9,11 @@ $limit = $_POST['limit'];
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
 
-if ($movie_category == 'All')
-{
-
-    $query = "SELECT * FROM movies where id >=".$limit." order by id" ;
+if ($movie_category == 'All'){
+    $query = "SELECT * FROM movies WHERE movie_flag=1 AND id >=".$limit." order by id" ;
 }
 else{
-    $query = "SELECT * FROM movies where Category ='".$movie_category."' and id >=".$limit." order by id"  ;
+    $query = "SELECT * FROM movies WHERE movie_flag=1 AND Category ='$movie_category' AND id >=".$limit." order by id"  ;
 }
 //$query = "SELECT * FROM movies where Category ='".$movie_category."' and id >=".$limit  ;
 $result=mysqli_query($sql_connect,$query);
