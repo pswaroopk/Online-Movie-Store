@@ -1,10 +1,10 @@
 <?php
-  $user_name = $_GET['name'];
-  $user_name = 'swaroop';
-  // require_once(fetch_movies.php)
+
+  session_start();
+  $user_name = $_SESSION['username'];
+  $admin = $_SESSION['admin'];
   include 'fetch_movies.php';
   $jdata = fetchMovies();
-  // echo $jdata;
   error_log(print_r('', TRUE));
 ?>
 
@@ -14,12 +14,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src = "../js/index.js" ></script>
     <script type="text/javascript" src="../js/move-top.js"></script>
     <script type="text/javascript">
       function loadMovies(jdata){
-        console.log(jdata);
         var d2 = $('<div class="section group">');
         $("#movie-page-cart").empty();
         $(function () {
@@ -30,23 +29,37 @@
             $("#movie-page-cart").append(d1);
             $("#movie-page-cart").append(d2);
         });
-
-        if(jdata != 0) {
+        //if(Object.keys(jdata).length === 0 && jdata.constructor === Object){
+        var admin = '<?php echo $admin ?>';
+        if(jdata != null) {
+            // console.log(admin);
             $.each(jdata, function (i, item) {
                 //var movie_cart = "preview.html";
                 var movie_cost = item.Cost;
                 var movie_name = item.Name;
                 var movie_image = "../images/" + item.Img_url;
                 var mov_name = '\'' + movie_name + '\'';
-                //alert(mov_name);
-                var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+
+                var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
+                if (admin == 'true') {
+                  d3.append($('<div class="delete_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))),
+                    $('<div class="clear">')
+                  );
+                  d3.append($('<div class="update_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="#">').text("Update"))),
+                    $('<div class="clear">')
+                  );
+                }
+
+                d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
                     $('<div class="price-details">').append(
                         $('<div class="price-number">').append(
                             $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
                         $('<div class="add-cart">').append(
-                            $('<h4>').append($('<a onclick="removeFromCart(' + mov_name + ')">').text("Remove Item"))),
+                            $('<h4>').append($('<a href="#" onclick="removeFromCart('+mov_name+')">').text("Remove Item"))),
                         $('<div class="clear">')
                     ));
                 d2.append(d3);
@@ -58,24 +71,64 @@
         }
       }
 
-      function removeFromCart(name){
+      function removeFromMovies(name){
+        // alert('hi');
         var username = '<?php echo $user_name ?>';
-        console.log(username, name);
         var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
         $.ajax({
-            async: false,
-            url: 'http://localhost/php/delete_cart.php',
+            //async: false,
+            url: 'http://localhost/php/update_movies.php',
             type: 'post',
-            data: {user_name : username, movie_name : name },
+            data: {movie_name : name},
             success:function(data){
-              $.get(showCartURL, function success(response) {
-                var jdata=$.parseJSON(response);
-                loadMovies(jdata);
-              });
+                // alert("Movie removed from database");
+                // window.location = window.location.href;
+                $.get(showCartURL, function success(response) {
+                  var jdata=$.parseJSON(response);
+                  loadMovies(jdata);
+                });
+            },
+            error: function(error) { alert("error:", JSON.stringify(error));  }
+        });
+      }
+
+      function removeFromCart(name){
+        var username = '<?php echo $user_name ?>';
+        var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
+        $.ajax({
+            //async: false,
+            url: 'http://localhost/php/update_cart.php',
+            type: 'post',
+            data: {user_name : username, movie_name : name, action: 'delete' },
+            success:function(data){
+                $.get(showCartURL, function success(response) {
+                  var jdata=$.parseJSON(response);
+                  loadMovies(jdata);
+                });
             },
             error: function() { alert("error loading file");  }
         });
       }
+
+      function emptyTheCart(name){
+        var username = '<?php echo $user_name ?>';
+        var showCartURL = 'http://localhost/php/fetch_movies.php?action=fetch';
+        $.ajax({
+            //async: false,
+            url: 'http://localhost/php/update_cart.php',
+            type: 'post',
+            data: {user_name : username, action: 'empty' },
+            success:function(data){
+                alert('Your cart is empty, please add Movies to cart!');
+                $.get(showCartURL, function success(response) {
+                  var jdata=$.parseJSON(response);
+                  loadMovies(jdata);
+                });
+            },
+            error: function() { alert("error loading file");  }
+        });
+      }
+
     </script>
 </head>
 <body>
@@ -85,17 +138,15 @@
             <div class="nav_list">
                 <ul>
                     <li><a href="../index.php">Home</a></li>
-<!--                    <li><a href="../contact.html">Sitemap</a></li>-->
                     <li><a href="../contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="account_desc">
                 <ul>
-                    <li><a href="signup_page.php">Register</a></li>
-                    <li><a href="login.php">Login</a></li>
-<!--                    <li><a href="../preview.html">Delivery</a></li>-->
-                    <li><a href="show_cart.php">Checkout</a></li>
-                    <li><a href="show_cart.php">My Account</a></li>
+                    <li id="add-movie"><a href="../admin.html">Add-a-movie</a></li>
+        						<li id="checkout"><a href="show_cart.php">Checkout</a></li>
+        						<li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
+                    <li id="user-list"><a id="user" href=#><?php echo $user; ?></a></li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -108,14 +159,12 @@
             </div>
             <div class="header_top_right">
               <div class="cart">
-                <p><span>Check out</span></p>
-                  <a href="#"></a>
+                  <a href="#" onclick="emptyTheCart('<?php echo $user_name?>')"><p><span>Check out</span></p></a>
               </div>
               <div class="cart">
-                <p><span>Empty Cart</span></p>
-                <a href="#"></a>
+                <a href="#" onclick="emptyTheCart('<?php echo $user_name?>')"><p><span>Empty Cart</span></p></a>
               </div>
-                <div class="clear"></div>
+              <div class="clear"></div>
             </div>
             <script type="text/javascript">
                 function DropDown(el) {

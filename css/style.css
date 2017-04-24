@@ -105,7 +105,7 @@ body {
 	padding:20px 0;
 }
 .logo {
-	float: left;
+	/* float: left; */
 }
 .header_top_right{
 	float:right;
@@ -158,6 +158,60 @@ body {
 	text-transform:uppercase;
 	vertical-align:middle;
 }
+
+.delete_btn {
+  position: absolute;
+  left: 55%;
+  display: none;
+  font-size:0.85em;
+  margin-top: 7px;
+  padding: 8px 10px;
+  font-family: 'ambleregular';
+  background:#FC7D01;
+  margin-top: 7px;
+  color: #FFF;
+  border: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.grid_1_of_5:hover .delete_btn {
+  display: block;
+
+}
+.delete_btn:hover{
+  text-shadow: 0px 0px 1px #000;
+  background:#292929;
+}
+
+
+.update_btn {
+  position: absolute;
+  left: 15%;
+  display: none;
+  font-size:0.85em;
+  margin-top: 7px;
+  padding: 8px 10px;
+  font-family: 'ambleregular';
+  background:#FC7D01;
+  margin-top: 7px;
+  color: #FFF;
+  border: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.grid_1_of_5:hover .update_btn {
+  display: block;
+
+}
+.update_btn:hover{
+  text-shadow: 0px 0px 1px #000;
+  background:#292929;
+}
+
 .wrapper-dropdown-2 {
     display:inline-block;
     margin: 0 auto;

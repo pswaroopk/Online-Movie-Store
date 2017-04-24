@@ -15,17 +15,17 @@ $md5password = md5($password);
 
 if (!empty($fullname) && !empty($username) && !empty($email) && !empty($password))
 {
-	$sql = "INSERT INTO user (Name, Username, Password, Email) 
+	$sql = "INSERT INTO user (Name, Username, Password, Email)
 			values ('$fullname', '$username', '$md5password', '$email')";
 	$result = mysqli_query($conn, $sql);
 	if ($result)
-	{
+	{		
 		header('Location: http://localhost/php/login.php');
 	}
 	else
 	{
 		header('Location: http://localhost/php/signup_page.php');
-	}	
+	}
 }
 
 mysqli_close($conn);

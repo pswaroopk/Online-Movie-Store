@@ -1,23 +1,12 @@
 /**
  * Created by asrirang on 4/8/17.
  */
-
-// function loadData()
-// {
-//     $("#ul_id_1 li").click(function() {
-//
-//         movie_catogery = $(this).text() ; // gets text contents of clicked li
-//         alert(movie_catogery);
-//         loadData1();
-//     });
-//
-// }
-
 var movie_category;
 var movie_count;
 var jdata;
 var movie_name;
-var curr_user;
+var curr_user='';
+var admin='false';
 
 $(document).ready(function (){
     ajax_fetchUser();
@@ -28,18 +17,43 @@ $(document).ready(function (){
         $("#register1").show();
         $("#login1").show();
         $("#cart12").hide();
-
-
+        $("#user").text('Guest');
     }
     else
     {
+        $("#tmp").text('');
         $("#checkout").show();
         $("#logout").show();
+        $("#user").text(curr_user);
         $("#register1").hide();
         $("#login1").hide();
         $("#cart12").show();
     }
+    if(admin == "true"){
+      $("#add-movie").show();
+    }else{
+      $("#add-movie").hide();
+    }
+
 });
+
+function removeUser(){
+  // $("#logout").empty().append($('<a href="php/login.php>').text("Login"));
+  $("#logout").hide();
+  $("#login1").show();
+  $("#user").text('Guest');
+  $("add-movie").hide();
+  $.ajax({
+      // async: false,
+      url: 'http://localhost/php/logout.php',
+      type:'post',
+      success:function (data) {
+          alert("Logged Out successfully");
+          window.location = '../index.php';
+      },
+      error: function() { console.log('error logging out');  }
+  })
+}
 
 function loadData(movie) {
 
@@ -121,21 +135,30 @@ function parsing_data(){
     if(jdata != 0) {
         $.each(jdata, function (i, item) {
             if (i < 10) {
-                //var movie_cart = "preview.html";
                 var movie_cost = item.cost;
                 var movie_name = item.name;
-                //var movie_page = 'preview.html';
                 var movie_image = "images/" + item.img;
                 var mov_name = '\'' + movie_name + '\'';
-                //alert(mov_name);
-                var d3 = $('<div class="grid_1_of_5 images_1_of_5">').append(
+
+                var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
+                if (admin == 'true') {
+                  d3.append($('<div class="delete_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))),
+                    $('<div class="clear">')
+                  );
+                  d3.append($('<div class="update_btn">').append(
+                    $('<h4>').append($('<a href="#" onclick="#">').text("Update"))),
+                    $('<div class="clear">')
+                  );
+                }
+                d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
                     $('<div class="price-details">').append(
                         $('<div class="price-number">').append(
                             $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
                         $('<div class="add-cart">').append(
-                            $('<h4>').append($('<a onclick="addToCart(' + mov_name + ')">').text("Add to Cart"))),
+                            $('<h4>').append($('<a href=# onclick="addToCart(' + mov_name + ')">').text("Add to Cart"))),
                         $('<div class="clear">')
                     ));
 
@@ -154,18 +177,17 @@ function parsing_data(){
 }
 
 function addToCart(name){
-    //alert(name);
-    if(curr_user == '')
-    {
-        alert("Login to enable Cart");
+
+    if(curr_user == ''){
+        window.location = 'http://localhost/php/user_login.php';
     }
     else {
         $.ajax({
             async: false,
-            url: 'http://localhost/php/cart_add.php',
+            url: 'http://localhost/php/update_cart.php',
             type: 'post',
             //dataType : "json",
-            data: {user_name: curr_user, movie_name: name},
+            data: {user_name: curr_user, movie_name: name, action: 'add'},
             success: function (data) {
                 alert("Added to Cart Sucessfully!!")
             },
@@ -183,8 +205,11 @@ function ajax_fetchUser(){
         url: "http://localhost/php/user_fetch.php",
         cache: false,
         success: function(data){
-            //alert(data);
-            curr_user = data;
+            if(data != ''){
+              var user = $.parseJSON(data);
+                curr_user = user.username;
+                admin = user.admin;
+            }
         }
     });
 }
@@ -193,6 +218,17 @@ function movie_preview(name1){
     window.location.replace('http://localhost/php/movie_preview.php?name=' + name1);
 }
 
+
+function checkOut(){
+  alert('Thanks for shopping with us!');
+  window.location = '../index.php';
+}
+
+
+function updateMovie(name){
+  //call search php or search method
+  //populate admin.html page
+}
 function search(){
 
     var p = document.getElementById('search1');
@@ -208,13 +244,8 @@ function search(){
         type: 'post',
         //dataType : "json",
         data: {movie_name : p.value },
-        success:function(data)
-        {
-
+        success:function(data){
             jdata = $.parseJSON(data);
-
-
-
         },
         error: function() { alert("error loading file");  }
     });

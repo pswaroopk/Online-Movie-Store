@@ -10,7 +10,7 @@ $movie_name= $_POST['movie_name'];
 session_start();
 $sql_connect=mysqli_connect('localhost','root','root','movie_store');
 
-$query = "SELECT * FROM movies where Name LIKE '%".$movie_name."%'" ;
+$query = "SELECT * FROM movies WHERE movie_flag=1 AND Name LIKE '%".$movie_name."%'" ;
 
 $result=mysqli_query($sql_connect,$query);
 $count = 0;
@@ -36,4 +36,3 @@ else
 
 
 ?>
-

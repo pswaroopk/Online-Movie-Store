@@ -48,7 +48,7 @@ while($row=$result1->fetch_assoc())
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="../js/move-top.js"></script>
     <script type="text/javascript" src="../js/easing.js"></script>
     <script type="text/javascript" src="../js/movie_ajax.js"></script>
@@ -61,17 +61,16 @@ while($row=$result1->fetch_assoc())
             <div class="nav_list">
                 <ul>
                     <li><a href="../index.php">Home</a></li>
-<!--                    <li><a href="../contact.html">Sitemap</a></li>-->
                     <li><a href="../contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="account_desc">
                 <ul>
+                    <li id="add-movie"><a href="../admin.html">Add-a-movie</a></li>
                     <li id="register1"><a href="signup_page.php">Register</a></li>
                     <li id="login1"><a href="login.php">Login</a></li>
-<!--                    <li><a href="../preview.html">Delivery</a></li>-->
-                    <li id="checkout"><a href="show_cart.php">Checkout</a></li>
-                    <li id="logout"><a href="show_cart.php">Logout</a></li>
+                    <li id="logout"><a href=# onclick="removeUser()">Logout</a></li>
+                    <li id="user-list"><a id="user" href=#>Guest</a></li>
                 </ul>
             </div>
             <div class="clear"></div>
@@ -181,7 +180,7 @@ while($row=$result1->fetch_assoc())
                     <div class="movie_desc">
                         <h3><a onclick="movie_preview('<?php echo $table_data1[0]['name'] ?>')"><?php echo $table_data1[0]['name'] ?> </a></h3>
                         <p>$<?php echo $table_data1[0]['cost'].".00" ?> </p>
-                        <span><a onclick="addToCart('<?php echo $table_data1[0]['name'] ?>')">Add to Cart</a></span>
+                        <span><a href=# onclick="addToCart('<?php echo $table_data1[0]['name'] ?>')">Add to Cart</a></span>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -193,7 +192,7 @@ while($row=$result1->fetch_assoc())
                     <div class="movie_desc">
                         <h3><a onclick="movie_preview('<?php echo $table_data1[1]['name'] ?>')"><?php echo $table_data1[1]['name'] ?> </a></h3>
                         <p>$<?php echo $table_data1[1]['cost'].".00" ?> </p>
-                        <span><a onclick="addToCart('<?php echo $table_data1[1]['name'] ?>')">Add to Cart</a></span>
+                        <span><a href=# onclick="addToCart('<?php echo $table_data1[1]['name'] ?>')">Add to Cart</a></span>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -206,7 +205,7 @@ while($row=$result1->fetch_assoc())
                     <div class="movie_desc">
                         <h3><a onclick="movie_preview('<?php echo $table_data1[2]['name'] ?>')"><?php echo $table_data1[2]['name'] ?> </a></h3>
                         <p>$<?php echo $table_data1[2]['cost'].".00" ?> </p>
-                        <span><a onclick="addToCart('<?php echo $table_data1[2]['name'] ?>')">Add to Cart</a></span>
+                        <span><a href=# onclick="addToCart('<?php echo $table_data1[2]['name'] ?>')">Add to Cart</a></span>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -219,7 +218,7 @@ while($row=$result1->fetch_assoc())
                     <div class="movie_desc">
                         <h3><a onclick="movie_preview('<?php echo $table_data1[3]['name'] ?>')"><?php echo $table_data1[3]['name'] ?> </a></h3>
                         <p>$<?php echo $table_data1[3]['cost'].".00" ?> </p>
-                        <span><a onclick="addToCart('<?php echo $table_data1[3]['name'] ?>')">Add to Cart</a></span>
+                        <span><a href=# onclick="addToCart('<?php echo $table_data1[3]['name'] ?>')">Add to Cart</a></span>
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -232,7 +231,7 @@ while($row=$result1->fetch_assoc())
                         <div class="movie_desc">
                             <h3><a onclick="movie_preview('<?php echo $table_data1[4]['name'] ?>')"><?php echo $table_data1[4]['name'] ?> </a></h3>
                             <p>$<?php echo $table_data1[4]['cost'].".00" ?> </p>
-                            <span><a onclick="addToCart('<?php echo $table_data1[4]['name'] ?>')">Add to Cart</a></span>
+                            <span><a href=# onclick="addToCart('<?php echo $table_data1[4]['name'] ?>')">Add to Cart</a></span>
                         </div>
                         <div class="clear"></div>
                     </div>
