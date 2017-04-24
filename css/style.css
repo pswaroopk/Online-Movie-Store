@@ -392,6 +392,7 @@ body {
 .add-cart{
 	float:right;
 	display: inline-block;
+	padding-bottom: 10px;
 }
 .add-cart h4 a{
 	font-size:0.85em;
@@ -411,6 +412,57 @@ body {
 	  text-shadow: 0px 0px 1px #000;
 	  background:#292929;
 }
+
+
+.del-cart1{
+	float: left;
+	display: inline-block;
+	padding-right: 10px;
+}
+.del-cart1 h4 a{
+	font-size:0.85em;
+	display: block;
+	padding:8px 10px;
+	font-family: 'ambleregular';
+	background: red;
+	color: #FFF;
+	text-decoration: none;
+	outline: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.del-cart1 h4 a:hover{
+	text-shadow: 0px 0px 1px #000;
+	background:#292929;
+}
+
+.upd-cart1{
+	float: right;
+	display: inline-block;
+	padding-right: 10px;
+}
+.upd-cart1 h4 a{
+	font-size:0.85em;
+	display: block;
+	padding:8px 10px;
+	font-family: 'ambleregular';
+	background: green;
+	color: #FFF;
+	text-decoration: none;
+	outline: 0;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.upd-cart1 h4 a:hover{
+	text-shadow: 0px 0px 1px #000;
+	background:#292929;
+}
+
+
 /*** Footer ***/
 .footer {
 	position: relative;

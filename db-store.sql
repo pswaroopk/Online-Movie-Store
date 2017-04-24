@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `cart` (
   `Username` varchar(20) NOT NULL,
-  `Name` varchar(20) NOT NULL,
+  `Name` varchar(40) NOT NULL,
   `flag` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`Name`, `Username`, `Password`, `Email`, `IsAdmin`) VALUES
-('', 'akshay', '3517525329b170f7ce87e0e16b6d0778', 'aksh@gmail.com', 0),
+('', 'akshay', '3517525329b170f7ce87e0e16b6d0778', 'aksh@gmail.com', 1),
 ('', 'akshay1', '3517525329b170f7ce87e0e16b6d0778', 'asd@gmail.com', 0),
 ('', 'awdsdd', '39826cc6ee17ad9fa8566084a400871e', 'awda@gmail.com', 0),
 ('phani p', 'pphani', '59af0e509592c9e6bc8c857ae46ac1a6', 'funnyphani12@gmail.com', 0),
