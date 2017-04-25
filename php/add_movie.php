@@ -6,13 +6,11 @@ $moviename = $_POST['movieName'];
 $category = $_POST['category'];
 $year = $_POST['year'];
 $cost = $_POST['cost'];
-$update = $_POST['update'];
 $description = $_POST['movie_description'];
 $movieflag = 1;
 // $target_dir = "C:/MAMP/htdocs/images/";
 $target_dir = "../images/";
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
-$_SESSION['update'] = true;
 
 
 if (!empty($moviename) && !empty($category) && !empty($image) && !empty($year) && !empty($cost) && !empty($description)){
