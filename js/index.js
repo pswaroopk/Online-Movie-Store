@@ -34,19 +34,9 @@ $(document).ready(function (){
     }else{
       $("#add-movie").hide();
     }
-
-    if(admin == 'true')
-    {
-        loadData('All');
-
-    }
-
-
-
 });
 
 function removeUser(){
-  // $("#logout").empty().append($('<a href="php/login.php>').text("Login"));
   $("#logout").hide();
   $("#login1").show();
   $("#user").text('Guest');
@@ -151,17 +141,6 @@ function parsing_data(){
                 var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
                 var d4 = $('<div class="price-details">');
 
-                // if (admin == 'true') {
-                //   d3.append($('<div class="delete_btn">').append(
-                //     $('<h4>').append($('<a href="#" onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))),
-                //     $('<div class="clear">')
-                //   );
-                //   d3.append($('<div class="update_btn">').append(
-                //     $('<h4>').append($('<a href="#" onclick="#">').text("Update"))),
-                //     $('<div class="clear">')
-                //   );
-                // }
-
                 d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
@@ -173,13 +152,12 @@ function parsing_data(){
                          $('<div class="clear">')
                     ));
 
-                if(admin == 'true')
-                {
+                if(admin == 'true'){
                     d4.append($('<div class="del-cart1">').append(
                         $('<h4>').append($('<a href=# onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))));
 
                     d4.append($('<div class="upd-cart1">').append(
-                        $('<h4>').append($('<a href=# onclick="#">').text("Update"))));
+                        $('<h4>').append($('<a href=# onclick="onUpdateClick('+ mov_name +')">').text("Update"))));
                 }
 
 
@@ -220,7 +198,6 @@ function addToCart(name){
 }
 
 function ajax_fetchUser(){
-
     $.ajax({
         async:false,
         url: "http://localhost/php/user_fetch.php",
@@ -239,17 +216,16 @@ function movie_preview(name1){
     window.location.replace('http://localhost/php/movie_preview.php?name=' + name1);
 }
 
-
 function checkOut(){
   alert('Thanks for shopping with us!');
   window.location = '../index.php';
 }
 
-
-function updateMovie(name){
-  //call search php or search method
-  //populate admin.html page
+function onUpdateClick(name){
+  window.location.href = 'http://localhost/php/update_movie.php' + '?name=' + name;
 }
+
+
 function search(){
 
     var p = document.getElementById('search1');

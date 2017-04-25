@@ -6,11 +6,13 @@ $moviename = $_POST['movieName'];
 $category = $_POST['category'];
 $year = $_POST['year'];
 $cost = $_POST['cost'];
+$update = $_POST['update'];
 $description = $_POST['movie_description'];
 $movieflag = 1;
 // $target_dir = "C:/MAMP/htdocs/images/";
 $target_dir = "../images/";
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
+$_SESSION['update'] = true;
 
 
 if (!empty($moviename) && !empty($category) && !empty($image) && !empty($year) && !empty($cost) && !empty($description)){
@@ -21,12 +23,19 @@ if (!empty($moviename) && !empty($category) && !empty($image) && !empty($year) &
       if (!$conn){
         die("Connection Failed: " . mysqli_connect_error());
       }
-
+      $query = "SELECT * FROM movies WHERE Name='$movie_name' AND movie_flag=1 ";
+      $res = mysqli_query($conn, $query);
+      if(!$res){
       $sql = "INSERT INTO `movies` (`Name`, `Category`, `Img_url`, `Year`, `Cost`, `Description`, `movie_flag`) VALUES
-                ('$moviename', '$Category', '$image', '$year', '$cost', '$description', '$movieflag')
+                ('$moviename', '$category', '$image', '$year', '$cost', '$description', '$movieflag')
                 ON DUPLICATE KEY UPDATE movie_flag=1";
+      }else{
+        $sql = "UPDATE movies SET Category='$category', Img_url='$image', Year='$year', Cost='$cost', Description='$description'
+                WHERE Name='$moviename'";
+      }
       $result = mysqli_query($conn, $sql);
       if ($result){
+        
         echo "Successfully movie added to database.";
       }
     }
