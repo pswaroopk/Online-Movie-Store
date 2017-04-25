@@ -35,8 +35,8 @@ if (!empty($moviename) && !empty($category) && !empty($image) && !empty($year) &
       }
       $result = mysqli_query($conn, $sql);
       if ($result){
-        
-        echo "Successfully movie added to database.";
+        //echo "Successfully movie added to database.";
+        header ('Location: http://localhost/index.php');
       }
     }
   }

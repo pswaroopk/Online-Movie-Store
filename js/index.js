@@ -225,7 +225,6 @@ function onUpdateClick(name){
   window.location.href = 'http://localhost/php/update_movie.php' + '?name=' + name;
 }
 
-
 function search(){
 
     var p = document.getElementById('search1');

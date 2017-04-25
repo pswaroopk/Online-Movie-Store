@@ -153,7 +153,7 @@ while($row=$result1->fetch_assoc())
                             <!--                            <div class="share">-->
                             <!--                                <p>Number of units :</p><input class="text_box" type="text">-->
                             <!--                            </div>-->
-                            <div class="button" style="float: left"><span><a onclick="addToCart('<?php echo $movie_name ?>')">Add to Cart</a></span></div>
+                            <div class="button" style="float: left"><span><a href=# onclick="addToCart('<?php echo $movie_name ?>')">Add to Cart</a></span></div>
                             <div class="clear"></div>
                         </div>
                         <div class="wish-list">

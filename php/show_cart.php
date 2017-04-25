@@ -42,27 +42,25 @@
                 var mov_name = '\'' + movie_name + '\'';
 
                 var d3 = $('<div class="grid_1_of_5 images_1_of_5">');
-                if (admin == 'true') {
-                  d3.append($('<div class="delete_btn">').append(
-                    $('<h4>').append($('<a href="#" onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))),
-                    $('<div class="clear">')
-                  );
-                  d3.append($('<div class="update_btn">').append(
-                    $('<h4>').append($('<a href="#" onclick="#">').text("Update"))),
-                    $('<div class="clear">')
-                  );
-                }
+                var d4 = $('<div class="price-details">');
 
                 d3.append(
                     $('<a onclick="movie_preview(' + mov_name + ')">').append($('<img src=' + movie_image + ' alt="" />')),
                     $('<h2>').append($('<a onclick="movie_preview(' + mov_name + ')">').text(movie_name)),
-                    $('<div class="price-details">').append(
+                    d4.append(
                         $('<div class="price-number">').append(
                             $('<p>').append($('<span class="rupees">').text("$" + movie_cost + ".00"))),
                         $('<div class="add-cart">').append(
                             $('<h4>').append($('<a href="#" onclick="removeFromCart('+mov_name+')">').text("Remove Item"))),
                         $('<div class="clear">')
                     ));
+                if(admin == 'true'){
+                    d4.append($('<div class="del-cart1">').append(
+                        $('<h4>').append($('<a href=# onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))));
+
+                    d4.append($('<div class="upd-cart1">').append(
+                        $('<h4>').append($('<a href=# onclick="onUpdateClick('+ mov_name +')">').text("Update"))));
+                }
                 d2.append(d3);
 
             })
