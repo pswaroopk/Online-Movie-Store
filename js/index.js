@@ -9,6 +9,7 @@ var curr_user='';
 var admin='false';
 
 $(document).ready(function (){
+    // $.ajaxSetup({cache: false});
     ajax_fetchUser();
 
     if(curr_user==''){
@@ -33,6 +34,9 @@ $(document).ready(function (){
       $("#add-movie").show();
     }else{
       $("#add-movie").hide();
+    }
+    if(window.location.href == 'http://localhost/' || window.location.href == 'http://localhost/index.php' || window.location.href == 'http://localhost/index.php#'){
+      loadData('English');
     }
 });
 
@@ -154,7 +158,7 @@ function parsing_data(){
 
                 if(admin == 'true'){
                     d4.append($('<div class="del-cart1">').append(
-                        $('<h4>').append($('<a href=# onclick="removeFromMovies(' + mov_name + ')">').text("Delete"))));
+                        $('<h4>').append($('<a href=# onclick="removeFromMoviesX(' + mov_name + ')">').text("Delete"))));
 
                     d4.append($('<div class="upd-cart1">').append(
                         $('<h4>').append($('<a href=# onclick="onUpdateClick('+ mov_name +')">').text("Update"))));
@@ -173,6 +177,28 @@ function parsing_data(){
     {
         $("#movie-page ").append($('<p><br/>&nbsp;&nbsp;No movies found </p>'));
     }
+}
+
+function removeFromMoviesX(name){
+  // alert('hi');
+  // var username = '<?php echo $user_name ?>';
+  var showCartURL = 'http://localhost/php/data_fetch.php';
+  $.ajax({
+      //async: false,
+      url: 'http://localhost/php/update_movies.php',
+      type: 'post',
+      data: {movie_name : name},
+      success:function(data){
+          // alert("Movie removed from database");
+          // window.location = window.location.href;
+          $.get(showCartURL, function success(response) {
+            var jdata=$.parseJSON(response);
+            // loadMovies(jdata);
+            loadData(movie_category);
+          });
+      },
+      error: function(error) { alert("error:", JSON.stringify(error));  }
+  });
 }
 
 function addToCart(name){

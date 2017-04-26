@@ -21,16 +21,20 @@ if (!empty($moviename) && !empty($category) && !empty($image) && !empty($year) &
       if (!$conn){
         die("Connection Failed: " . mysqli_connect_error());
       }
-      $query = "SELECT * FROM movies WHERE Name='$movie_name' AND movie_flag=1 ";
+      $query = "SELECT * FROM movies WHERE Name='$moviename' AND movie_flag=1 ";
       $res = mysqli_query($conn, $query);
-      if(!$res){
-      $sql = "INSERT INTO `movies` (`Name`, `Category`, `Img_url`, `Year`, `Cost`, `Description`, `movie_flag`) VALUES
-                ('$moviename', '$category', '$image', '$year', '$cost', '$description', '$movieflag')
-                ON DUPLICATE KEY UPDATE movie_flag=1";
-      }else{
-        $sql = "UPDATE movies SET Category='$category', Img_url='$image', Year='$year', Cost='$cost', Description='$description'
-                WHERE Name='$moviename'";
+      $num_rows = mysqli_num_rows($res);
+      if($num_rows > 0 ){
+        $row = $res->fetch_assoc();
+        if($row['movie_flag'] == 0)
+          $sql = "UPDATE movies SET movie_flag=1 WHERE Name='$moviename'";
+        else
+          $sql = "UPDATE movies SET Category='$category', Img_url='$image', Year='$year', Cost='$cost', Description='$description'
+                  WHERE Name='$moviename'";
       }
+      else
+        $sql = "INSERT INTO `movies` (`Name`, `Category`, `Img_url`, `Year`, `Cost`, `Description`, `movie_flag`) VALUES
+                  ('$moviename', '$category', '$image', '$year', '$cost', '$description', '$movieflag')";
       $result = mysqli_query($conn, $sql);
       if ($result){
         //echo "Successfully movie added to database.";

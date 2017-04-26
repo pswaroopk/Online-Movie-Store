@@ -98,7 +98,7 @@ session_start();
 					<div class="categories">
 						<ul id="ul_id_1">
 							<h3>Categories</h3>
-							<li><a href=# onclick="loadData('All')">All</a></li>
+							<!-- <li><a href=# onclick="loadData('All')">All</a></li> -->
 							<li><a href=# onclick="loadData('Hindi')">Hindi</a></li>
 							<li><a href=# onclick="loadData('Telugu')">Telugu</a></li>
 							<li><a href=# onclick="loadData('Tamil')">Tamil</a></li>
@@ -138,7 +138,7 @@ session_start();
 						</div>
 					</div>
 					<div class="section group">
-						<div class="grid_1_of_5 images_1_of_5">
+						<!-- <div class="grid_1_of_5 images_1_of_5">
 							<a onclick="movie_preview('End Game')"><img src="images/end-game.jpg" alt="" /></a>
 							<h2><a onclick="movie_preview('End Game')">End Game</a></h2>
 							<div class="price-details">
@@ -204,7 +204,7 @@ session_start();
 								</div>
 								<div class="clear"></div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="content_bottom">
 						<div class="heading">
@@ -212,7 +212,7 @@ session_start();
 						</div>
 					</div>
 					<div class="section group">
-						<div class="grid_1_of_5 images_1_of_5">
+						<!-- <div class="grid_1_of_5 images_1_of_5">
 							<a onclick="movie_preview('Beauty and the beast')"><img src="images/beauty_and_the_beast.jpg" alt="" /></a>
 							<h2><a onclick="movie_preview('Beauty and the beast')">Beauty and the beast</a></h2>
 							<div class="price-details">
@@ -279,7 +279,7 @@ session_start();
 								</div>
 								<div class="clear"></div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="content" id="page1">
